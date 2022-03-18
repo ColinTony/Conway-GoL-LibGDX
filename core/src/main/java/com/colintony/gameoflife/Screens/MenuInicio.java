@@ -10,7 +10,6 @@ import com.colintony.gameoflife.Utils.Menu;
 
 public class MenuInicio extends PantallaAbstract {
 
-    private GameOfLife gameOfLife;
     private SpriteBatch batch;
     private Menu menu;
 
