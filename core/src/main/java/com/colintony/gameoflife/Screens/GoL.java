@@ -32,6 +32,7 @@ public class GoL extends PantallaAbstract implements Disposable {
     //Dimensiones de una sola celula
     private Vector2 dimensions;
     private FPSLogger fpsLogger; // para checar los fps en consola
+    private float dt;
 
     // end GoL variabels
 
@@ -69,19 +70,14 @@ public class GoL extends PantallaAbstract implements Disposable {
 
         this.grid_cells = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
 
-        this.createRandomWorld(0.01984f);
+        this.createWorldPre(0);
 
         this.dimensions = new Vector2(ConfigGame.WIDTH_PANTALLA / (float) grid_cells[0].length, ConfigGame.HEIGTH_PANTALLA / (float) grid_cells.length);
     }
+    /*
+    Metodos para Crear el mundo
+     */
     public void createRandomWorld()
-    {
-        for (int x = 0; x < grid_cells[0].length; x++) {
-            for (int y = 0; y < grid_cells[0].length; y++) {
-                this.grid_cells[x][y] = MathUtils.randomBoolean();
-            }
-        }
-    }
-    public void createWorldEmpty()
     {
         for (int x = 0; x < grid_cells[0].length; x++) {
             for (int y = 0; y < grid_cells[0].length; y++) {
@@ -94,7 +90,12 @@ public class GoL extends PantallaAbstract implements Disposable {
     {
         for (int x = 0; x < grid_cells[0].length; x++) {
             for (int y = 0; y < grid_cells[0].length; y++) {
-                this.grid_cells[x][y] = MathUtils.randomBoolean(chance);
+                boolean rand = MathUtils.randomBoolean(chance);
+                this.grid_cells[x][y] = rand;
+                if(rand)
+                    DataInfo.celulasVivas++;
+                else
+                    DataInfo.celulasMuertas++;
             }
         }
     }
@@ -114,6 +115,22 @@ public class GoL extends PantallaAbstract implements Disposable {
             }
         }
     }
+    public void createWorldPre(int p)
+    {
+        for (int x = 0; x < grid_cells[0].length; x++) {
+            for (int y = 0; y < grid_cells[0].length; y++) {
+                this.grid_cells[x][y] = false;
+            }
+        }
+        int x = this.grid_cells[0].length/2;
+        int y = this.grid_cells[0].length/2;
+        this.grid_cells[x][y]=true;
+        this.grid_cells[x][y-1]=true;
+        this.grid_cells[x][y-2]=true;
+        this.grid_cells[x][y-3]=true;
+        this.grid_cells[x+1][y-2]=true;
+        this.grid_cells[x-1][y-2]=true;
+    }
 
     @Override
     public void render(float delta) {
@@ -124,16 +141,28 @@ public class GoL extends PantallaAbstract implements Disposable {
         renderer.setProjectionMatrix(camera.combined);
         this.fpsLogger.log();
 
-        final float dt = Gdx.graphics.getDeltaTime();
-        this.update(dt);
+
         this.inputGameStatus();
         this.inputsCamera();
+        this.batch.begin();
+        if(this.screenInfo.isMostrarControles())
+            this.screenInfo.dibujar(this.batch);
+        this.batch.end();
         switch(state)
         {
             case PAUSE:
+                this.renderer.begin(ShapeRenderer.ShapeType.Line);
+                {
+                for (int x = 0; x < grid_cells[0].length; x++)
+                    for (int y = 0; y < grid_cells[0].length; y++)
+                        if (grid_cells[x][y])
+                            this.renderer.rect(x * dimensions.x, y * dimensions.y, dimensions.x, dimensions.y);
+                }
                 break;
             case RUN:
-                this.renderer.begin(ShapeRenderer.ShapeType.Filled);
+                this.dt = Gdx.graphics.getDeltaTime();
+                this.update();
+                this.renderer.begin(ShapeRenderer.ShapeType.Line);
                 {
                     for (int x = 0; x < grid_cells[0].length; x++)
                         for (int y = 0; y < grid_cells[0].length; y++)
@@ -152,17 +181,17 @@ public class GoL extends PantallaAbstract implements Disposable {
     }
 
     // metodo update que ira actualizando la pantalla con las reglas.
-    public void update(float dt)
+    public void update()
     {
         for (int x = 0; x < grid_cells[0].length; x++) {
             for (int y = 0; y < grid_cells[0].length; y++) {
                 if (grid_cells[x][y])
                 {
                     if(isCrowded(x, y) || isAlone(x, y))
-                        die(x, y);
+                        die(this.grid_cells[x][y],x, y);
                 } else {
                     if(isAlive(x, y))
-                        alive(x, y);
+                        alive(this.grid_cells[x][y],x, y);
                 }
             }
         }
@@ -170,13 +199,15 @@ public class GoL extends PantallaAbstract implements Disposable {
     }
     // Funciones de vida o muerte
     // xPos y yPos son las cordenadas de la celula en x-axis y y-axis
-    public void die(int xPos , int yPos)
+    public void die(boolean status,int xPos , int yPos)
     {
-        Gdx.app.postRunnable(() -> grid_cells[xPos][yPos] = false);
+        if(status == true)
+            Gdx.app.postRunnable(() -> grid_cells[xPos][yPos] = false);
     }
-    public void alive(int xPos , int yPos)
+    public void alive(boolean status,int xPos , int yPos)
     {
-        Gdx.app.postRunnable(() -> grid_cells[xPos][yPos] = true);
+        if(status == false)
+            Gdx.app.postRunnable(() -> grid_cells[xPos][yPos] = true);
     }
 
     // Checando las reglas
@@ -226,6 +257,9 @@ public class GoL extends PantallaAbstract implements Disposable {
         return 0;
     }
 
+    /*
+     INOPUTSSS CAMERA
+     */
     public void inputsCamera()
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.D))
@@ -282,6 +316,11 @@ public class GoL extends PantallaAbstract implements Disposable {
             this.state = STATE.RUN;
             resume();
         }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.N))
+        {
+            this.state = STATE.PAUSE;
+            this.update();
+        }
     }
 
     // TODO: Resolver el punto del grid y el esapcio
@@ -289,7 +328,7 @@ public class GoL extends PantallaAbstract implements Disposable {
     {
         if(Gdx.input.justTouched())
         {
-            Vector3 mousePos=this.camera.unproject(new Vector3(Gdx.input.getX(),Gdx.input.getY() , 0));
+            Vector3 mousePos = this.camera.unproject(new Vector3(Gdx.input.getX(),Gdx.input.getY() , 0));
             int x = Gdx.input.getDeltaX();
             int y = Gdx.input.getDeltaY();
 

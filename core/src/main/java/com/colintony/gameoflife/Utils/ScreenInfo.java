@@ -18,27 +18,28 @@ public class ScreenInfo {
 
     public ScreenInfo()
     {
-        this.posInfoCell = new Position(0,100);
+        this.posInfoCell = new Position(0,50);
         this.mostrarControles = true;
-        this.posController = new Position(ConfigGame.WIDTH_PANTALLA-300,ConfigGame.HEIGTH_PANTALLA-150);
-        this.bitMapFont = new BitmapFont(Gdx.files.internal("fontData.fnt"),
-                Gdx.files.internal("fontData.png"),false);
+        this.posController = new Position(5,ConfigGame.HEIGTH_PANTALLA-10);
+        this.bitMapFont = new BitmapFont();
     }
     public void dibujar(SpriteBatch batch)
     {
-        String INSTRUCCIONES = "Zoom + : W \n" +
-                "Zoom - : S \n" + "Zoom max: C \n"  + "Zoom min: Z \n" +
-                "Pause: P\nReanudar: R\nDerecha: Rigth\nIzquierda: Left\n" +
-                "Arriba: UP\nAbajo: Down\nOcultar controles: D";
+        String INSTRUCCIONES = " Zoom + : W | " +
+                "Zoom - : S | " + "Zoom max: C | "  + "Zoom min: Z | " +
+                "Pause: P | Reanudar: R | Derecha: Rigth | Izquierda: Left | " +
+                "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |";
 
         String CELULAS_VIVAS = " Celulas vivas: ";
         String CELULAR_MUERTAS=" Celulas muertas: ";
+        String GENERACION = "GENERACION ACTUAL: ";
 
         CELULAR_MUERTAS += DataInfo.celulasMuertas;
         CELULAS_VIVAS += DataInfo.celulasVivas;
+        GENERACION += DataInfo.generacion;
 
-        String INFO = CELULAR_MUERTAS + " ---- " + CELULAS_VIVAS;
-        bitMapFont.setColor(Color.CYAN);
+        String INFO = CELULAR_MUERTAS + " ---- " + CELULAS_VIVAS +" ---- "+ GENERACION;
+        bitMapFont.setColor(Color.RED);
         bitMapFont.draw(batch,INSTRUCCIONES,this.posController.getX(),this.posController.getY());
         bitMapFont.draw(batch,INFO,this.posInfoCell.getX(),this.posInfoCell.getY());
     }

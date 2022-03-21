@@ -20,7 +20,7 @@ public class DesktopLauncher {
         LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
         configuration.title = "gameoflife";
         configuration.width = ConfigGame.WIDTH_PANTALLA;
-        configuration.height = ConfigGame.HEIGTH_PANTALLA -90;
+        configuration.height = ConfigGame.HEIGTH_PANTALLA;
         System.out.println("Pantalla heigth: " + configuration.height + "width: " + configuration.width);
 
         return configuration;

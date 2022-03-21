@@ -4,7 +4,7 @@ public class DataInfo {
     public static int celulasMuertas = 0;
     public static int celulasVivas = 0;
     public static int totalCel = celulasMuertas+celulasVivas;
-    public static int generacion;
+    public static int generacion = 0;
 
     public static void updateData()
     {
