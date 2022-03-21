@@ -119,7 +119,12 @@ public class GoL extends PantallaAbstract implements Disposable {
     {
         for (int x = 0; x < grid_cells[0].length; x++) {
             for (int y = 0; y < grid_cells[0].length; y++) {
-                this.grid_cells[x][y] = false;
+                boolean rand = false;
+                this.grid_cells[x][y] = rand;
+                if(rand)
+                    DataInfo.celulasVivas++;
+                else
+                    DataInfo.celulasMuertas++;
             }
         }
         int x = this.grid_cells[0].length/2;
@@ -130,6 +135,8 @@ public class GoL extends PantallaAbstract implements Disposable {
         this.grid_cells[x][y-3]=true;
         this.grid_cells[x+1][y-2]=true;
         this.grid_cells[x-1][y-2]=true;
+        DataInfo.celulasMuertas -= 6;
+        DataInfo.celulasVivas += 6;
     }
 
     @Override
@@ -183,6 +190,7 @@ public class GoL extends PantallaAbstract implements Disposable {
     // metodo update que ira actualizando la pantalla con las reglas.
     public void update()
     {
+        DataInfo.generacion++;
         for (int x = 0; x < grid_cells[0].length; x++) {
             for (int y = 0; y < grid_cells[0].length; y++) {
                 if (grid_cells[x][y])
@@ -202,12 +210,20 @@ public class GoL extends PantallaAbstract implements Disposable {
     public void die(boolean status,int xPos , int yPos)
     {
         if(status == true)
+        {
             Gdx.app.postRunnable(() -> grid_cells[xPos][yPos] = false);
+            DataInfo.celulasVivas--;
+            DataInfo.celulasMuertas++;
+        }
     }
     public void alive(boolean status,int xPos , int yPos)
     {
         if(status == false)
+        {
             Gdx.app.postRunnable(() -> grid_cells[xPos][yPos] = true);
+            DataInfo.celulasMuertas--;
+            DataInfo.celulasVivas++;
+        }
     }
 
     // Checando las reglas
