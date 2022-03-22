@@ -349,8 +349,8 @@ public class GoL extends PantallaAbstract implements Disposable {
             int x = Gdx.input.getDeltaX((int) mousePos.x);
             int y = Gdx.input.getDeltaY((int) mousePos.y);
 
-            int deltaX = (int) (mousePos.x % this.dimensions.x);
-            int deltaY = (int) (mousePos.y % this.dimensions.y);
+            int deltaX = Math.round (mousePos.x % this.dimensions.x);
+            int deltaY = Math.round (mousePos.y % this.dimensions.y);
 
             if( deltaX != 0 || deltaY !=0)
                 mousePos.x -=deltaX;
@@ -359,10 +359,13 @@ public class GoL extends PantallaAbstract implements Disposable {
                 mousePos.y-=deltaY;
 
 
-            int finalX = (int) ((int)mousePos.x/this.dimensions.x);
-            int finalY = (int) ((int)mousePos.y/this.dimensions.y);
-            System.out.println("Casilla:("+finalX+","+finalY+")");
-            Gdx.app.postRunnable(()->grid_cells[finalX][finalY] = true);
+            int finalX = Math.round(mousePos.x/this.dimensions.x);
+            int finalY = Math.round (mousePos.y/this.dimensions.y);
+
+            if(this.grid_cells[finalX][finalY])
+                Gdx.app.postRunnable(()->grid_cells[finalX][finalY] = false);
+            else
+                Gdx.app.postRunnable(()->grid_cells[finalX][finalY] = true);
         }
     }
 
