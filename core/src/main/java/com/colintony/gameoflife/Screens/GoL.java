@@ -70,7 +70,7 @@ public class GoL extends PantallaAbstract implements Disposable {
 
         this.grid_cells = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
 
-        this.createWorldPre(0);
+        this.createRandomWorld(0);
 
         this.dimensions = new Vector2(ConfigGame.WIDTH_PANTALLA / (float) grid_cells[0].length, ConfigGame.HEIGTH_PANTALLA / (float) grid_cells.length);
     }
@@ -151,6 +151,7 @@ public class GoL extends PantallaAbstract implements Disposable {
 
         this.inputGameStatus();
         this.inputsCamera();
+        this.inputCelulas();
         this.batch.begin();
         if(this.screenInfo.isMostrarControles())
             this.screenInfo.dibujar(this.batch);
@@ -158,7 +159,7 @@ public class GoL extends PantallaAbstract implements Disposable {
         switch(state)
         {
             case PAUSE:
-                this.renderer.begin(ShapeRenderer.ShapeType.Line);
+                this.renderer.begin(ShapeRenderer.ShapeType.Filled);
                 {
                 for (int x = 0; x < grid_cells[0].length; x++)
                     for (int y = 0; y < grid_cells[0].length; y++)
@@ -169,7 +170,7 @@ public class GoL extends PantallaAbstract implements Disposable {
             case RUN:
                 this.dt = Gdx.graphics.getDeltaTime();
                 this.update();
-                this.renderer.begin(ShapeRenderer.ShapeType.Line);
+                this.renderer.begin(ShapeRenderer.ShapeType.Filled);
                 {
                     for (int x = 0; x < grid_cells[0].length; x++)
                         for (int y = 0; y < grid_cells[0].length; y++)
@@ -345,20 +346,23 @@ public class GoL extends PantallaAbstract implements Disposable {
         if(Gdx.input.justTouched())
         {
             Vector3 mousePos = this.camera.unproject(new Vector3(Gdx.input.getX(),Gdx.input.getY() , 0));
-            int x = Gdx.input.getDeltaX();
-            int y = Gdx.input.getDeltaY();
+            int x = Gdx.input.getDeltaX((int) mousePos.x);
+            int y = Gdx.input.getDeltaY((int) mousePos.y);
 
-            int deltaX = (int)mousePos.x % 5;
-            int deltaY = (int)mousePos.y % 5;
+            int deltaX = (int) (mousePos.x % this.dimensions.x);
+            int deltaY = (int) (mousePos.y % this.dimensions.y);
 
             if( deltaX != 0 || deltaY !=0)
                 mousePos.x -=deltaX;
 
-            if( (y%5) == 0)
+            if( (y % this.dimensions.y) == 0)
                 mousePos.y-=deltaY;
 
-            Gdx.app.postRunnable(()->grid_cells[x][y] = false);
 
+            int finalX = (int) ((int)mousePos.x/this.dimensions.x);
+            int finalY = (int) ((int)mousePos.y/this.dimensions.y);
+            System.out.println("Casilla:("+finalX+","+finalY+")");
+            Gdx.app.postRunnable(()->grid_cells[finalX][finalY] = true);
         }
     }
 
