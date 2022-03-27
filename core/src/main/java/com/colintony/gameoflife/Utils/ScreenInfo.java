@@ -10,7 +10,7 @@ import javax.xml.crypto.Data;
 
 public class ScreenInfo {
     private boolean mostrarControles;
-
+    private boolean modeBorders;
     private BitmapFont bitMapFont;
     private Position posController;
     private Position posInfoCell;
@@ -18,6 +18,7 @@ public class ScreenInfo {
 
     public ScreenInfo()
     {
+        this.modeBorders = false;
         this.posInfoCell = new Position(0,50);
         this.mostrarControles = true;
         this.posController = new Position(5,ConfigGame.HEIGTH_PANTALLA-10);
@@ -28,7 +29,8 @@ public class ScreenInfo {
         String INSTRUCCIONES = " Zoom + : W | " +
                 "Zoom - : S | " + "Zoom max: C | "  + "Zoom min: Z | " +
                 "Pause: P | Reanudar: R | Derecha: Rigth | Izquierda: Left | " +
-                "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |";
+                "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
+                "Debug: Q";
 
         String CELULAS_VIVAS = " Celulas vivas: ";
         String CELULAR_MUERTAS=" Celulas muertas: ";
@@ -66,5 +68,13 @@ public class ScreenInfo {
 
     public void setPosInfoCell(Position posInfoCell) {
         this.posInfoCell = posInfoCell;
+    }
+
+    public boolean isModeBorders() {
+        return modeBorders;
+    }
+
+    public void setModeBorders(boolean modeBorders) {
+        this.modeBorders = modeBorders;
     }
 }
