@@ -115,12 +115,12 @@ public class Tablero {
         int yMas = y+1>= heigth ? 0:y+1;
 
         int vecinos = 0;
-        vecinos += this.grid[x][yMas] ? 1:0;       // arriba
-        vecinos += this.grid[x][yMenos] ? 1:0;     // abajo
-        vecinos += this.grid[xMenos][y] ? 1:0;        // izquierda
+        vecinos += this.grid[x][yMas] ? 1:0;        // arriba
+        vecinos += this.grid[x][yMenos] ? 1:0;      // abajo
+        vecinos += this.grid[xMenos][y] ? 1:0;      // izquierda
         vecinos += this.grid[xMas][y] ? 1:0;        // derecha
-        vecinos += this.grid[xMenos][yMenos] ? 1:0;   // izquierda-abajo
-        vecinos += this.grid[xMenos][yMas] ? 1:0;     // izqeruida-arriba
+        vecinos += this.grid[xMenos][yMenos] ? 1:0; // izquierda-abajo
+        vecinos += this.grid[xMenos][yMas] ? 1:0;   // izqeruida-arriba
         vecinos += this.grid[xMas][yMas] ? 1:0;     // derecha-arriba
         vecinos += this.grid[xMas][yMenos] ? 1:0;   // derecha-Abajo
 
@@ -208,6 +208,8 @@ public class Tablero {
         try{
             return this.grid[xPos+xOffset][yPos+yOffset] ? 1 : 0;
         }catch (IndexOutOfBoundsException e){
+            
+
         }
         return 0;
     }

@@ -69,7 +69,7 @@ public class GoL extends PantallaAbstract implements Disposable {
         this.renderer.setAutoShapeType(true);
         this.renderer.setColor(Color.BLACK);
 
-        this.tablero = new Tablero(0.983f);
+        this.tablero = new Tablero(0.87645f);
         this.dimensions = new Vector2(ConfigGame.WIDTH_PANTALLA / (float) this.tablero.getGrid()[0].length, ConfigGame.HEIGTH_PANTALLA / (float) this.tablero.getGrid().length);
     }
 
@@ -108,7 +108,7 @@ public class GoL extends PantallaAbstract implements Disposable {
             case RUN:
                 this.dt = Gdx.graphics.getDeltaTime();
                 // this.tablero.updateTaroide(); // taroide
-                this.tablero.update(); // no taoride
+                this.tablero.updateTaroide(); // no taoride
                 {
                     for (int x = 0; x < this.tablero.getGrid()[0].length; x++)
                         for (int y = 0; y < this.tablero.getGrid()[0].length; y++)
