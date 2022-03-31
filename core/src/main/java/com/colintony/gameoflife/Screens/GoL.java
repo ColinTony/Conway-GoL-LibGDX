@@ -1,6 +1,5 @@
 package com.colintony.gameoflife.Screens;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
@@ -9,12 +8,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Disposable;
 import com.colintony.gameoflife.MainMenu;
-import com.colintony.gameoflife.Models.Celula;
 import com.colintony.gameoflife.Models.Tablero;
 import com.colintony.gameoflife.Utils.ConfigGame;
 import com.colintony.gameoflife.Utils.DataInfo;
@@ -107,8 +104,7 @@ public class GoL extends PantallaAbstract implements Disposable {
                 break;
             case RUN:
                 this.dt = Gdx.graphics.getDeltaTime();
-                // this.tablero.updateTaroide(); // taroide
-                this.tablero.updateTaroide(); // no taoride
+                this.tablero.updateTaroide(); // taroide
                 {
                     for (int x = 0; x < this.tablero.getGrid()[0].length; x++)
                         for (int y = 0; y < this.tablero.getGrid()[0].length; y++)
@@ -218,11 +214,17 @@ public class GoL extends PantallaAbstract implements Disposable {
 
             int finalX = Math.round(mousePos.x/this.dimensions.x);
             int finalY = Math.round (mousePos.y/this.dimensions.y);
+            try
+            {
+                if(this.tablero.getGrid()[finalX][finalY])
+                    Gdx.app.postRunnable(()->this.tablero.getGrid()[finalX][finalY] = false);
+                else
+                    Gdx.app.postRunnable(()->this.tablero.getGrid()[finalX][finalY] = true);
+            }catch (IndexOutOfBoundsException e)
+            {
+                System.out.println(e);
+            }
 
-            if(this.tablero.getGrid()[finalX][finalY])
-                Gdx.app.postRunnable(()->this.tablero.getGrid()[finalX][finalY] = false);
-            else
-                Gdx.app.postRunnable(()->this.tablero.getGrid()[finalX][finalY] = true);
         }
     }
 

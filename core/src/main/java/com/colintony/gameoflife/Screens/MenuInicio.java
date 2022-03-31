@@ -12,11 +12,13 @@ public class MenuInicio extends PantallaAbstract {
 
     private SpriteBatch batch;
     private Menu menu;
+    private GoL gameConways;
 
     public MenuInicio(MainMenu game) {
         super(game);
         this.batch = this.game.getSpriteBatch();
         this.menu = new Menu();
+        this.gameConways = new GoL(game);
     }
 
     @Override
@@ -46,7 +48,8 @@ public class MenuInicio extends PantallaAbstract {
             {
                 case 0:
                     // practica Conway GameOfLife
-                    // this.game.setScreen(practicaHormiga);
+                    this.menu.dispose();
+                    this.game.setScreen(this.gameConways);
                     break;
 
                 case 1:

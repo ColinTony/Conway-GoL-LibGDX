@@ -208,7 +208,7 @@ public class Tablero {
         try{
             return this.grid[xPos+xOffset][yPos+yOffset] ? 1 : 0;
         }catch (IndexOutOfBoundsException e){
-            
+
 
         }
         return 0;

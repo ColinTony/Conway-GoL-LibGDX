@@ -90,5 +90,7 @@ public class Menu extends Actor
     public void dispose()
     {
         this.music.dispose();
+        this.bitMapFont.dispose();
+        this.flecha.dispose();
     }
 }

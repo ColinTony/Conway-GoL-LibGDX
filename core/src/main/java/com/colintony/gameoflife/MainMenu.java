@@ -15,9 +15,9 @@ public class MainMenu extends Game {
     @Override
     public void create() {
         this.batch = new SpriteBatch();
-        this.gameOfLife = new GoL(this);
-        //this.menuInicio = new MenuInicio(this);
-        this.setScreen(this.gameOfLife);
+        //this.gameOfLife = new GoL(this);
+        this.menuInicio = new MenuInicio(this);
+        this.setScreen(this.menuInicio);
     }
 
 
