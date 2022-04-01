@@ -15,6 +15,7 @@ import com.colintony.gameoflife.MainMenu;
 import com.colintony.gameoflife.Models.Tablero;
 import com.colintony.gameoflife.Utils.ConfigGame;
 import com.colintony.gameoflife.Utils.DataInfo;
+import com.colintony.gameoflife.Utils.InputsEvents;
 import com.colintony.gameoflife.Utils.ScreenInfo;
 
 public class GoL extends PantallaAbstract implements Disposable {
@@ -23,7 +24,12 @@ public class GoL extends PantallaAbstract implements Disposable {
     private ScreenInfo screenInfo;
     private OrthographicCamera camera;
     private Tablero tablero;
-
+    private float R;
+    private float G;
+    private float B;
+    private float R_C;
+    private float G_C;
+    private float B_C;
     // Inicio GoL variables
     private ShapeRenderer renderer;
 
@@ -47,6 +53,10 @@ public class GoL extends PantallaAbstract implements Disposable {
 
     public GoL(MainMenu game) {
         super(game);
+        this.R = 1f;
+        this.G = 1f;
+        this.B = 1f;
+
         // Dibujo e Informacion
         this.batch = this.game.getSpriteBatch();
         this.dataInfo = new DataInfo();
@@ -64,7 +74,7 @@ public class GoL extends PantallaAbstract implements Disposable {
 
         this.renderer = new ShapeRenderer();
         this.renderer.setAutoShapeType(true);
-        this.renderer.setColor(Color.BLACK);
+
 
         this.tablero = new Tablero(0.87645f);
         this.dimensions = new Vector2(ConfigGame.WIDTH_PANTALLA / (float) this.tablero.getGrid()[0].length, ConfigGame.HEIGTH_PANTALLA / (float) this.tablero.getGrid().length);
@@ -73,17 +83,18 @@ public class GoL extends PantallaAbstract implements Disposable {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1,1,1,1);
+        Gdx.gl.glClearColor(R,G,B,1);
+        this.renderer.setColor(new Color(R_C,G_C,B_C,1));
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         renderer.setProjectionMatrix(camera.combined);
         this.fpsLogger.log();
 
-
         this.inputGameStatus();
-        this.inputsCamera();
-        this.inputCelulas();
+        InputsEvents.inputsCamera(this.screenInfo,this.camera);
+        InputsEvents.inputCelulas(this.camera,this.dimensions,this.tablero);
+
         this.batch.begin();
         if(this.screenInfo.isMostrarControles())
             this.screenInfo.dibujar(this.batch);
@@ -122,58 +133,6 @@ public class GoL extends PantallaAbstract implements Disposable {
         this.renderer.end();
     }
 
-
-    // ------- Fin REvision taroide
-    /*
-     INOPUTSSS CAMERA
-     */
-    public void inputsCamera()
-    {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.Q))
-            this.screenInfo.setModeBorders(!this.screenInfo.isModeBorders());
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.D))
-            this.screenInfo.setMostrarControles(!this.screenInfo.isMostrarControles());
-
-        if(Gdx.input.isKeyPressed(Input.Keys.Z))
-            this.camera.zoom = 1.0f;
-
-        if (Gdx.input.isKeyPressed(Input.Keys.C))
-            this.camera.zoom = 0.080f;
-
-        if(Gdx.input.isKeyPressed(Input.Keys.W))
-            if(this.camera.zoom > 0.080f)
-                this.camera.zoom -= 0.008f;
-
-        if(Gdx.input.isKeyPressed(Input.Keys.S))
-            if(this.camera.zoom <= 1.0)
-                this.camera.zoom += 0.008f;
-
-        // MOVIMIENTOS
-        if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            this.camera.translate(6, 0);
-            this.screenInfo.getPosInfoCell().setX(this.screenInfo.getPosInfoCell().getX()+6);
-            this.screenInfo.getPosController().setX(this.screenInfo.getPosController().getX()+6);
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            this.camera.translate(-6, 0);
-            this.screenInfo.getPosInfoCell().setX(this.screenInfo.getPosInfoCell().getX()-6);
-            this.screenInfo.getPosController().setX(this.screenInfo.getPosController().getX()-6);
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            this.camera.translate(0, -6);
-            this.screenInfo.getPosInfoCell().setY(this.screenInfo.getPosInfoCell().getY()-6);
-            this.screenInfo.getPosController().setY(this.screenInfo.getPosController().getY()-6);
-        }
-
-        if(Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            this.camera.translate(0, 6);
-            this.screenInfo.getPosInfoCell().setY(this.screenInfo.getPosInfoCell().getY()+6);
-            this.screenInfo.getPosController().setY(this.screenInfo.getPosController().getY()+6);
-        }
-    }
     public void inputGameStatus()
     {
         if(Gdx.input.isKeyPressed(Input.Keys.P))
@@ -191,40 +150,18 @@ public class GoL extends PantallaAbstract implements Disposable {
             this.state = STATE.PAUSE;
             this.tablero.update();
         }
-    }
-
-    // TODO: Resolver el punto del grid y el esapcio
-    public void inputCelulas()
-    {
-        if(Gdx.input.justTouched())
+        // Cambiar colores aleatoriamente
+        if(Gdx.input.isKeyJustPressed(Input.Keys.J))
         {
-            Vector3 mousePos = this.camera.unproject(new Vector3(Gdx.input.getX(),Gdx.input.getY() , 0));
-            int x = Gdx.input.getDeltaX((int) mousePos.x);
-            int y = Gdx.input.getDeltaY((int) mousePos.y);
-
-            int deltaX = Math.round (mousePos.x % this.dimensions.x);
-            int deltaY = Math.round (mousePos.y % this.dimensions.y);
-
-            if( deltaX != 0 || deltaY !=0)
-                mousePos.x -=deltaX;
-
-            if( (y % this.dimensions.y) == 0)
-                mousePos.y-=deltaY;
-
-
-            int finalX = Math.round(mousePos.x/this.dimensions.x);
-            int finalY = Math.round (mousePos.y/this.dimensions.y);
-            try
-            {
-                if(this.tablero.getGrid()[finalX][finalY])
-                    Gdx.app.postRunnable(()->this.tablero.getGrid()[finalX][finalY] = false);
-                else
-                    Gdx.app.postRunnable(()->this.tablero.getGrid()[finalX][finalY] = true);
-            }catch (IndexOutOfBoundsException e)
-            {
-                System.out.println(e);
-            }
-
+            this.R = (float)Math.random();
+            this.G = (float)Math.random();
+            this.B = (float)Math.random();
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.K))
+        {
+            this.R_C = (float)Math.random();
+            this.G_C = (float)Math.random();
+            this.B_C = (float)Math.random();
         }
     }
 

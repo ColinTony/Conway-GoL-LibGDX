@@ -30,7 +30,7 @@ public class ScreenInfo {
                 "Zoom - : S | " + "Zoom max: C | "  + "Zoom min: Z | " +
                 "Pause: P | Reanudar: R | Derecha: Rigth | Izquierda: Left | " +
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
-                "Debug: Q";
+                "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J |";
 
         String CELULAS_VIVAS = " Celulas vivas: ";
         String CELULAR_MUERTAS=" Celulas muertas: ";
