@@ -11,19 +11,12 @@ public class Tablero {
     public Tablero(float chance)
     {
         this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
-        createRandomWorld(0f);
+        createRandomWorld(chance);
     }
     /*
    Metodos para Crear el mundo
     */
-    public void createRandomWorld()
-    {
-        for (int x = 0; x < this.grid[0].length; x++) {
-            for (int y = 0; y < this.grid[0].length; y++) {
-                this.grid[x][y] = MathUtils.randomBoolean();
-            }
-        }
-    }
+
     // RANDOM BOLLEAN CON CHANCE DE PROBABILIDAD
     public void createRandomWorld(float chance)
     {
@@ -43,14 +36,6 @@ public class Tablero {
         for (int x = 0; x < this.grid[0].length; x++) {
             for (int y = 0; y < this.grid[0].length; y++) {
                 this.grid[x][y] = false;
-            }
-        }
-    }
-    public void createWorldAllAlive()
-    {
-        for (int x = 0; x < this.grid[0].length; x++) {
-            for (int y = 0; y < this.grid[0].length; y++) {
-                this.grid[x][y] = true;
             }
         }
     }

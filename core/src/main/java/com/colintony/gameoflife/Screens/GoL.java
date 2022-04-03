@@ -75,8 +75,7 @@ public class GoL extends PantallaAbstract implements Disposable {
         this.renderer = new ShapeRenderer();
         this.renderer.setAutoShapeType(true);
 
-
-        this.tablero = new Tablero(0.87645f);
+        this.tablero = new Tablero(0f);
         this.dimensions = new Vector2(ConfigGame.WIDTH_PANTALLA / (float) this.tablero.getGrid()[0].length, ConfigGame.HEIGTH_PANTALLA / (float) this.tablero.getGrid().length);
     }
 

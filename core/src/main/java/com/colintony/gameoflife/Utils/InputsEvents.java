@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.colintony.gameoflife.Models.Tablero;
 
 public class InputsEvents {
+
+
     // ------- Fin REvision taroide
     /*
      INOPUTSSS CAMERA
@@ -68,6 +70,42 @@ public class InputsEvents {
         asi modificar el valor de esa celda.
      */
     public static void inputCelulas(OrthographicCamera camera, Vector2 dimensions, Tablero tablero)
+    {
+        if(Gdx.input.justTouched())
+        {
+            Vector3 mousePos = camera.unproject(new Vector3(Gdx.input.getX(),Gdx.input.getY() , 0));
+            int x = Gdx.input.getDeltaX((int) mousePos.x);
+            int y = Gdx.input.getDeltaY((int) mousePos.y);
+
+            int deltaX = Math.round (mousePos.x % dimensions.x);
+            int deltaY = Math.round (mousePos.y % dimensions.y);
+
+            if( deltaX != 0 || deltaY !=0)
+                mousePos.x -=deltaX;
+
+            if( (y % dimensions.y) == 0)
+                mousePos.y-=deltaY;
+
+
+            int finalX = Math.round(mousePos.x/dimensions.x);
+            int finalY = Math.round (mousePos.y/dimensions.y);
+            try
+            {
+                if(tablero.getGrid()[finalX][finalY])
+                    Gdx.app.postRunnable(()->tablero.getGrid()[finalX][finalY] = false);
+                else
+                    Gdx.app.postRunnable(()->tablero.getGrid()[finalX][finalY] = true);
+            }catch (IndexOutOfBoundsException e)
+            {
+                System.out.println(e);
+            }
+
+        }
+    }
+    /*
+        Input de configuraciones conocidas
+     */
+    public static void inputConocidas(OrthographicCamera camera, Vector2 dimensions, Tablero tablero)
     {
         if(Gdx.input.justTouched())
         {
