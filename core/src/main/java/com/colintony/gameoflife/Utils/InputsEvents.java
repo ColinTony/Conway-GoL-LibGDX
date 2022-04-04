@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.colintony.gameoflife.Models.Tablero;
+import com.colintony.gameoflife.Screens.GoL;
 
 public class InputsEvents {
 
@@ -74,6 +75,20 @@ public class InputsEvents {
 
     }
     /*
+    INPUTS SAVE AND LOAD
+     */
+    public static void inputSL(Tablero tablero, GoL.STATE state)
+    {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.G))
+        {
+            DataInfo.saveConfig(tablero);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F))
+        {
+            state = GoL.STATE.PAUSE;
+        }
+    }
+    /*
         Input de configuraciones conocidas
      */
     public static void inputConocidas(OrthographicCamera camera, Vector2 dimensions, Tablero tablero, int conocidas)
@@ -104,10 +119,19 @@ public class InputsEvents {
                         Gdx.app.postRunnable(()->Conocidas.onlyCelula(tablero,finalX,finalY));
                         break;
                     case 1:
-                        Gdx.app.postRunnable(()->Conocidas.ociladorMiddleweight(tablero,finalX,finalY));
+                        Gdx.app.postRunnable(()->Conocidas.naveMiddleweight(tablero,finalX,finalY));
                         break;
                     case 2:
-                        Gdx.app.postRunnable(()->Conocidas.ociladorGlider(tablero,finalX,finalY));
+                        Gdx.app.postRunnable(()->Conocidas.naveGlider(tablero,finalX,finalY));
+                        break;
+                    case 3:
+                        Gdx.app.postRunnable(()->Conocidas.ociladorGalaxy(tablero,finalX,finalY));
+                        break;
+                    case 4:
+                        Gdx.app.postRunnable(()->Conocidas.ociladorClock(tablero,finalX,finalY));
+                        break;
+                    case 5:
+                        Gdx.app.postRunnable(()->Conocidas.acron(tablero,finalX,finalY));
                         break;
                     default:
                         System.out.println("Ocurrio un error pero te pongo una celula");

@@ -11,7 +11,7 @@ public class Conocidas {
         -----*----*--------
         ------*****--------
      */
-    public static void ociladorMiddleweight(Tablero tablero,int x,int y)
+    public static void naveMiddleweight(Tablero tablero,int x,int y)
     {
         boolean grid_conocidas[][] = tablero.getGrid();
 
@@ -33,7 +33,7 @@ public class Conocidas {
         --------*----------
         ------***----------
      */
-    public static void ociladorGlider(Tablero tablero,int x,int y)
+    public static void naveGlider(Tablero tablero,int x,int y)
     {
         boolean grid_conocidas[][] = tablero.getGrid();
 
@@ -45,7 +45,88 @@ public class Conocidas {
 
         tablero.setGrid(grid_conocidas);
     }
+    /*
+        -------------------
+        --------*----------
+        ---------**--------
+        -------**----------
+        ---------*---------
+        -------------------
+     */
+    public static void ociladorClock(Tablero tablero,int x,int y)
+    {
+        boolean grid_conocidas[][] = tablero.getGrid();
 
+        grid_conocidas[x][y] = true;
+        grid_conocidas[x+1][y-1] = true;
+        grid_conocidas[x+2][y-1] = true;
+        grid_conocidas[x][y-2] = true;
+        grid_conocidas[x-1][y-2] = true;
+        grid_conocidas[x+1][y-3] = true;
+
+
+        tablero.setGrid(grid_conocidas);
+    }
+
+    /*
+        -------------------
+        --------**-******--
+        --------**-******--
+        --------**---------
+        --------**-----**--
+        --------**-----**--
+        --------**-----**--
+        ---------------**--
+        --------******-**--
+        --------******-**--
+        -------------------
+        -------------------
+     */
+    public static void ociladorGalaxy(Tablero tablero,int x,int y)
+    {
+        boolean grid_conocidas[][] = tablero.getGrid();
+
+        for(int i=0; i<2; i++)
+        {
+            for(int j = 0; j<6; j++)
+            {
+                grid_conocidas[x+i][y-j] = true;
+                grid_conocidas[x+7+i][y-3-j]=true;
+            }
+        }
+
+        for(int i=0; i<6; i++)
+        {
+            for(int j = 0; j<2; j++)
+            {
+                grid_conocidas[x+3+i][y-j] = true;
+                grid_conocidas[x+i][y-7-j] = true;
+            }
+        }
+
+        tablero.setGrid(grid_conocidas);
+    }
+    /*
+        -------------------
+        -------*-----------
+        ---------*--------
+        ------**--***------
+        -------------------
+        -------------------
+     */
+    public static void acron(Tablero tablero,int x , int y)
+    {
+        boolean grid_conocidas[][] = tablero.getGrid();
+        grid_conocidas[x][y] = true;
+        grid_conocidas[x][y-2] = true;
+        grid_conocidas[x-1][y-2] = true;
+        grid_conocidas[x+3][y-2] = true;
+        grid_conocidas[x+4][y-2] = true;
+        grid_conocidas[x+5][y-2] = true;
+        grid_conocidas[x+2][y-1] = true;
+
+        tablero.setGrid(grid_conocidas);
+    }
     public static void onlyCelula(Tablero tablero,int x,int y)
     {
         try

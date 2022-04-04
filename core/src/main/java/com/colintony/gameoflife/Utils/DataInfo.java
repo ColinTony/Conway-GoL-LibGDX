@@ -1,40 +1,28 @@
 package com.colintony.gameoflife.Utils;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Json;
+import com.colintony.gameoflife.Models.Tablero;
+
+import java.util.UUID;
+
 public class DataInfo {
     public static int celulasMuertas = 0;
     public static int celulasVivas = 0;
-    public static int totalCel = celulasMuertas+celulasVivas;
     public static int generacion = 0;
 
-    public static void updateData()
-    {
-        totalCel = celulasMuertas+celulasVivas;
-    }
 
-    public static void addCelda(boolean isBlanca)
+    public static void saveConfig(Tablero tablero)
     {
-        if(isBlanca)
-            celulasVivas++;
-        else
-            celulasMuertas++;
+        Json json = new Json();
+        String tableroJson = json.toJson(tablero);
+        UUID unique = UUID.randomUUID();
+        String fileName = "config-";
+        fileName+=unique.toString();
+        fileName+=".json";
 
-        updateData();
-    }
-    public static void cambiarCelda(boolean isBlanca)
-    {
-        if(isBlanca)
-        {
-            celulasVivas--;
-            celulasMuertas++;
-        }else
-        {
-            celulasMuertas--;
-            celulasVivas++;
-        }
-        updateData();
-    }
-    public static void nuevaGeneracion()
-    {
-        generacion++;
+        FileHandle fileJson = Gdx.files.absolute("./"+fileName);
+        fileJson.writeString(tableroJson,true);
     }
 }

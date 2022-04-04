@@ -25,7 +25,12 @@ public class ScreenInfo {
         this.posController = new Position(5,ConfigGame.HEIGTH_PANTALLA-10);
         this.bitMapFont = new BitmapFont();
         this.conocida = 0;
-        this.figurasConocidas = new String[]{"Celula", "Ocilador - Middleweight","Ocilador - Glider"};
+        this.figurasConocidas = new String[]{"Celula",
+                "Nave - Middleweight",
+                "Nave - Glider",
+                "Ocilador - Kok's Galaxy",
+                "Ocilador - Clock",
+                "Config - Acron"};
     }
     public void dibujar(SpriteBatch batch)
     {
@@ -34,9 +39,16 @@ public class ScreenInfo {
                 "Pause: P | Reanudar: R | Derecha: Rigth | Izquierda: Left | " +
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
                 "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J | Reset figura colocar: space \n\n";
+        INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F";
         INSTRUCCIONES += "| Cambiar figura colocar: I - ";
 
-        INSTRUCCIONES+=this.figurasConocidas[conocida];
+        if(conocida < this.figurasConocidas.length)
+            INSTRUCCIONES+=this.figurasConocidas[conocida];
+        else{
+            this.conocida = 0;
+            INSTRUCCIONES+=this.figurasConocidas[conocida];
+        }
+
         
         String CELULAS_VIVAS = " Celulas vivas: ";
         String CELULAR_MUERTAS=" Celulas muertas: ";
