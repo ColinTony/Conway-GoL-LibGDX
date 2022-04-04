@@ -25,32 +25,19 @@ public class ScreenInfo {
         this.posController = new Position(5,ConfigGame.HEIGTH_PANTALLA-10);
         this.bitMapFont = new BitmapFont();
         this.conocida = 0;
-        this.figurasConocidas = new String[]{"Celula", "Ocilador - Middleweight"};
+        this.figurasConocidas = new String[]{"Celula", "Ocilador - Middleweight","Ocilador - Glider"};
     }
     public void dibujar(SpriteBatch batch)
     {
-        String FIGURA;
         String INSTRUCCIONES = " Zoom + : W | " +
                 "Zoom - : S | " + "Zoom max: C | "  + "Zoom min: Z | " +
                 "Pause: P | Reanudar: R | Derecha: Rigth | Izquierda: Left | " +
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
                 "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J | Reset figura colocar: space \n\n";
         INSTRUCCIONES += "| Cambiar figura colocar: I - ";
-        switch (this.conocida)
-        {
-            case 0:
-                FIGURA =" Celula";
-                break;
-            case 1:
-                FIGURA =" Ocilador - Middleweight";
-                break;
-            default:
-                System.out.println("Ocurrio un error pero te pongo una celula");
-                FIGURA =" Celula";
-                this.conocida=0;
-                break;
-        }
-        INSTRUCCIONES+=FIGURA;
+
+        INSTRUCCIONES+=this.figurasConocidas[conocida];
+        
         String CELULAS_VIVAS = " Celulas vivas: ";
         String CELULAR_MUERTAS=" Celulas muertas: ";
         String GENERACION = "GENERACION ACTUAL: ";

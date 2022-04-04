@@ -106,6 +106,9 @@ public class InputsEvents {
                     case 1:
                         Gdx.app.postRunnable(()->Conocidas.ociladorMiddleweight(tablero,finalX,finalY));
                         break;
+                    case 2:
+                        Gdx.app.postRunnable(()->Conocidas.ociladorGlider(tablero,finalX,finalY));
+                        break;
                     default:
                         System.out.println("Ocurrio un error pero te pongo una celula");
                         Gdx.app.postRunnable(()->Conocidas.onlyCelula(tablero,finalX,finalY));

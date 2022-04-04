@@ -27,6 +27,24 @@ public class Conocidas {
 
         tablero.setGrid(grid_conocidas);
     }
+    /*
+        -------------------
+        -------*-----------
+        --------*----------
+        ------***----------
+     */
+    public static void ociladorGlider(Tablero tablero,int x,int y)
+    {
+        boolean grid_conocidas[][] = tablero.getGrid();
+
+        grid_conocidas[x][y] = true;
+        grid_conocidas[x+1][y] = true;
+        grid_conocidas[x+2][y] = true;
+        grid_conocidas[x+2][y+1]=true;
+        grid_conocidas[x+1][y+2]=true;
+
+        tablero.setGrid(grid_conocidas);
+    }
 
     public static void onlyCelula(Tablero tablero,int x,int y)
     {
