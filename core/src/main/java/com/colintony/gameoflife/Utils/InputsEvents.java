@@ -18,6 +18,15 @@ public class InputsEvents {
      */
     public static void inputsCamera(ScreenInfo screenInfo, OrthographicCamera camera)
     {
+        if(Gdx.input.isKeyJustPressed(Input.Keys.I)) {
+            if (screenInfo.getConocida() < screenInfo.getFigurasConocidas().length)
+                screenInfo.setConocida(screenInfo.getConocida() + 1);
+            else
+                screenInfo.setConocida(0);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
+            screenInfo.setConocida(0);
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q))
             screenInfo.setModeBorders(!screenInfo.isModeBorders());
 
@@ -63,49 +72,11 @@ public class InputsEvents {
             screenInfo.getPosController().setY(screenInfo.getPosController().getY()+6);
         }
 
-
-    }
-    /*
-        Con esta funcion se hacen los calculos para detectar en donde toco el grid
-        asi modificar el valor de esa celda.
-     */
-    public static void inputCelulas(OrthographicCamera camera, Vector2 dimensions, Tablero tablero)
-    {
-        if(Gdx.input.justTouched())
-        {
-            Vector3 mousePos = camera.unproject(new Vector3(Gdx.input.getX(),Gdx.input.getY() , 0));
-            int x = Gdx.input.getDeltaX((int) mousePos.x);
-            int y = Gdx.input.getDeltaY((int) mousePos.y);
-
-            int deltaX = Math.round (mousePos.x % dimensions.x);
-            int deltaY = Math.round (mousePos.y % dimensions.y);
-
-            if( deltaX != 0 || deltaY !=0)
-                mousePos.x -=deltaX;
-
-            if( (y % dimensions.y) == 0)
-                mousePos.y-=deltaY;
-
-
-            int finalX = Math.round(mousePos.x/dimensions.x);
-            int finalY = Math.round (mousePos.y/dimensions.y);
-            try
-            {
-                if(tablero.getGrid()[finalX][finalY])
-                    Gdx.app.postRunnable(()->tablero.getGrid()[finalX][finalY] = false);
-                else
-                    Gdx.app.postRunnable(()->tablero.getGrid()[finalX][finalY] = true);
-            }catch (IndexOutOfBoundsException e)
-            {
-                System.out.println(e);
-            }
-
-        }
     }
     /*
         Input de configuraciones conocidas
      */
-    public static void inputConocidas(OrthographicCamera camera, Vector2 dimensions, Tablero tablero)
+    public static void inputConocidas(OrthographicCamera camera, Vector2 dimensions, Tablero tablero, int conocidas)
     {
         if(Gdx.input.justTouched())
         {
@@ -127,10 +98,20 @@ public class InputsEvents {
             int finalY = Math.round (mousePos.y/dimensions.y);
             try
             {
-                if(tablero.getGrid()[finalX][finalY])
-                    Gdx.app.postRunnable(()->tablero.getGrid()[finalX][finalY] = false);
-                else
-                    Gdx.app.postRunnable(()->tablero.getGrid()[finalX][finalY] = true);
+                switch (conocidas)
+                {
+                    case 0:
+                        Gdx.app.postRunnable(()->Conocidas.onlyCelula(tablero,finalX,finalY));
+                        break;
+                    case 1:
+                        Gdx.app.postRunnable(()->Conocidas.ociladorMiddleweight(tablero,finalX,finalY));
+                        break;
+                    default:
+                        System.out.println("Ocurrio un error pero te pongo una celula");
+                        Gdx.app.postRunnable(()->Conocidas.onlyCelula(tablero,finalX,finalY));
+                        break;
+                }
+
             }catch (IndexOutOfBoundsException e)
             {
                 System.out.println(e);

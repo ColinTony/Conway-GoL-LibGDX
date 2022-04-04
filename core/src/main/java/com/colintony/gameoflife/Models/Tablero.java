@@ -7,6 +7,7 @@ import com.colintony.gameoflife.Utils.DataInfo;
 
 public class Tablero {
     private boolean grid[][];
+    private boolean grid_conocida[][];
 
     public Tablero(float chance)
     {
@@ -31,36 +32,9 @@ public class Tablero {
             }
         }
     }
-    public void createWorldAllDie()
+    public void insertarConocida()
     {
-        for (int x = 0; x < this.grid[0].length; x++) {
-            for (int y = 0; y < this.grid[0].length; y++) {
-                this.grid[x][y] = false;
-            }
-        }
-    }
-    public void createWorldPre(int p)
-    {
-        for (int x = 0; x < this.grid[0].length; x++) {
-            for (int y = 0; y < this.grid[0].length; y++) {
-                boolean rand = false;
-                this.grid[x][y] = rand;
-                if(rand)
-                    DataInfo.celulasVivas++;
-                else
-                    DataInfo.celulasMuertas++;
-            }
-        }
-        int x = this.grid[0].length/2;
-        int y = this.grid[0].length/2;
-        this.grid[x][y]=true;
-        this.grid[x][y-1]=true;
-        this.grid[x][y-2]=true;
-        this.grid[x][y-3]=true;
-        this.grid[x+1][y-2]=true;
-        this.grid[x-1][y-2]=true;
-        DataInfo.celulasMuertas -= 6;
-        DataInfo.celulasVivas += 6;
+
     }
     /*
         Creando un mundo Taroide

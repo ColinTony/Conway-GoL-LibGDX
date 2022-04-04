@@ -14,7 +14,8 @@ public class ScreenInfo {
     private BitmapFont bitMapFont;
     private Position posController;
     private Position posInfoCell;
-
+    private int conocida;
+    private String [] figurasConocidas;
 
     public ScreenInfo()
     {
@@ -23,15 +24,33 @@ public class ScreenInfo {
         this.mostrarControles = true;
         this.posController = new Position(5,ConfigGame.HEIGTH_PANTALLA-10);
         this.bitMapFont = new BitmapFont();
+        this.conocida = 0;
+        this.figurasConocidas = new String[]{"Celula", "Ocilador - Middleweight"};
     }
     public void dibujar(SpriteBatch batch)
     {
+        String FIGURA;
         String INSTRUCCIONES = " Zoom + : W | " +
                 "Zoom - : S | " + "Zoom max: C | "  + "Zoom min: Z | " +
                 "Pause: P | Reanudar: R | Derecha: Rigth | Izquierda: Left | " +
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
-                "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J |";
-
+                "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J | Reset figura colocar: space \n\n";
+        INSTRUCCIONES += "| Cambiar figura colocar: I - ";
+        switch (this.conocida)
+        {
+            case 0:
+                FIGURA =" Celula";
+                break;
+            case 1:
+                FIGURA =" Ocilador - Middleweight";
+                break;
+            default:
+                System.out.println("Ocurrio un error pero te pongo una celula");
+                FIGURA =" Celula";
+                this.conocida=0;
+                break;
+        }
+        INSTRUCCIONES+=FIGURA;
         String CELULAS_VIVAS = " Celulas vivas: ";
         String CELULAR_MUERTAS=" Celulas muertas: ";
         String GENERACION = "GENERACION ACTUAL: ";
@@ -76,5 +95,21 @@ public class ScreenInfo {
 
     public void setModeBorders(boolean modeBorders) {
         this.modeBorders = modeBorders;
+    }
+
+    public int getConocida() {
+        return conocida;
+    }
+
+    public void setConocida(int conocida) {
+        this.conocida = conocida;
+    }
+
+    public String[] getFigurasConocidas() {
+        return figurasConocidas;
+    }
+
+    public void setFigurasConocidas(String[] figurasConocidas) {
+        this.figurasConocidas = figurasConocidas;
     }
 }
