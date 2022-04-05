@@ -91,7 +91,6 @@ public class GoL extends PantallaAbstract implements Disposable {
         this.fpsLogger.log();
 
         this.inputGameStatus();
-        InputsEvents.inputSL(this.tablero,this.state);
         InputsEvents.inputConocidas(this.camera,this.dimensions,this.tablero,this.screenInfo.getConocida());
         InputsEvents.inputsCamera(this.screenInfo,this.camera);
 
@@ -132,7 +131,9 @@ public class GoL extends PantallaAbstract implements Disposable {
 
         this.renderer.end();
     }
-
+    /*
+        Inputs STATUS GAME
+     */
     public void inputGameStatus()
     {
         if(Gdx.input.isKeyPressed(Input.Keys.P))
@@ -162,6 +163,15 @@ public class GoL extends PantallaAbstract implements Disposable {
             this.R_C = (float)Math.random();
             this.G_C = (float)Math.random();
             this.B_C = (float)Math.random();
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.G))
+        {
+            DataInfo.saveConfig(tablero);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.F))
+        {
+            this.state = GoL.STATE.PAUSE;
+            this.tablero = DataInfo.loadConfig(this.tablero);
         }
     }
 

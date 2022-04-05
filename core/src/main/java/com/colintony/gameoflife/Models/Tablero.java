@@ -5,14 +5,19 @@ import com.badlogic.gdx.math.MathUtils;
 import com.colintony.gameoflife.Utils.ConfigGame;
 import com.colintony.gameoflife.Utils.DataInfo;
 
+import java.util.Arrays;
+
 public class Tablero {
     private boolean grid[][];
-    private boolean grid_conocida[][];
 
     public Tablero(float chance)
     {
         this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
         createRandomWorld(chance);
+    }
+    public Tablero(){};
+    public Tablero(boolean[][] grid) {
+        this.grid = grid;
     }
     /*
    Metodos para Crear el mundo
@@ -179,5 +184,12 @@ public class Tablero {
 
     public void setGrid(boolean[][] grid) {
         this.grid = grid;
+    }
+
+    @Override
+    public String toString() {
+        return "Tablero{" +
+                "grid=" + Arrays.toString(grid) +
+                '}';
     }
 }

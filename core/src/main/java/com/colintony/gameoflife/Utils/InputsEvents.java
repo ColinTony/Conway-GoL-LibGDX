@@ -75,20 +75,6 @@ public class InputsEvents {
 
     }
     /*
-    INPUTS SAVE AND LOAD
-     */
-    public static void inputSL(Tablero tablero, GoL.STATE state)
-    {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.G))
-        {
-            DataInfo.saveConfig(tablero);
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.F))
-        {
-            state = GoL.STATE.PAUSE;
-        }
-    }
-    /*
         Input de configuraciones conocidas
      */
     public static void inputConocidas(OrthographicCamera camera, Vector2 dimensions, Tablero tablero, int conocidas)
