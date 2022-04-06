@@ -165,12 +165,12 @@ public class GoL extends PantallaAbstract implements Disposable {
             this.B_C = (float)Math.random();
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.G))
-        {
             DataInfo.saveConfig(tablero);
-        }
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.F))
         {
             this.state = GoL.STATE.PAUSE;
+            this.pause();
             this.tablero = DataInfo.loadConfig(this.tablero);
         }
     }
@@ -199,6 +199,8 @@ public class GoL extends PantallaAbstract implements Disposable {
     @Override
     public void pause() {
         super.pause();
+        this.state = STATE.PAUSE;
+
     }
 
     @Override
