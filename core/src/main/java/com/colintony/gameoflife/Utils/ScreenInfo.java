@@ -39,7 +39,7 @@ public class ScreenInfo {
                 "Pause: P | Reanudar: R | Derecha: Rigth | Izquierda: Left | " +
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
                 "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J | Reset figura colocar: space \n\n";
-        INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F";
+        INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F | Ver grafica: V";
         INSTRUCCIONES += "| Cambiar figura colocar: I - ";
 
         if(conocida < this.figurasConocidas.length)

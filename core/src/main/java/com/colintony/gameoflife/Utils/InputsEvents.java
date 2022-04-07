@@ -10,6 +10,8 @@ import com.badlogic.gdx.math.Vector3;
 import com.colintony.gameoflife.Models.Tablero;
 import com.colintony.gameoflife.Screens.GoL;
 
+import java.io.IOException;
+
 public class InputsEvents {
 
 
@@ -27,6 +29,16 @@ public class InputsEvents {
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
             screenInfo.setConocida(0);
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.V))
+        {
+            System.out.println("presionado");
+            try {
+                DataInfo.chart();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q))
             screenInfo.setModeBorders(!screenInfo.isModeBorders());
