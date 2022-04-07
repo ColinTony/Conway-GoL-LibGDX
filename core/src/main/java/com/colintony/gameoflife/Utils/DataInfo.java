@@ -79,23 +79,26 @@ public class DataInfo {
      */
     public static void chart() throws IOException
     {
-        Gdx.app.postRunnable(()->{
-            try {
-                List<String> command = new LinkedList<>();
-                command.add("C:/Program Files/Python3/python");
-                command.add(pathPythonScript);
-                //ProcessBuilder need to separate string into list string not one long string
-                ProcessBuilder pb = new ProcessBuilder(command);
-                System.out.println(command);
-                Process p = pb.start(); // Start the process.
-                int result = 0; // Wait for the process to finish.
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    List<String> command = new LinkedList<>();
+                    command.add("C:/Program Files/Python3/python");
+                    command.add(pathPythonScript);
+                    //ProcessBuilder need to separate string into list string not one long string
+                    ProcessBuilder pb = new ProcessBuilder(command);
+                    System.out.println(command);
+                    Process p = pb.start(); // Start the process.
+                    int result = 0; // Wait for the process to finish.
 
-                result = p.waitFor();
-                System.out.println("Script executed successfully"+result);
-            }catch (InterruptedException | IOException e) {
-                e.printStackTrace();
+                    result = p.waitFor();
+                    System.out.println("Script executed successfully"+result);
+                }catch (InterruptedException | IOException e) {
+                    e.printStackTrace();
+                }
             }
         });
-
+        thread.start();
     }
 }
