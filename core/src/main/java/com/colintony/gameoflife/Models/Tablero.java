@@ -19,7 +19,10 @@ public class Tablero {
     {
         this.isTerm = true;
         this.shannon = new Shannon();
-
+        UUID unique = UUID.randomUUID();
+        this.fileNamePlots = "plots-";
+        this.fileNamePlots += unique.toString();
+        this.fileNamePlots += ".json";
 
 
         this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
@@ -86,7 +89,7 @@ public class Tablero {
 
         int vecinos = 0;
         this.binary = "";
-        this.isTerm = true;
+        this.isTerm = false;
         vecinos += this.grid[xMas][yMenos] ? binarioAdd(false,1):binarioAdd(false,0);   // derecha-Abajo
         vecinos += this.grid[x][yMenos] ? binarioAdd(false,1):binarioAdd(false,0);;      // abajo
         vecinos += this.grid[xMenos][yMenos] ? binarioAdd(false,1):binarioAdd(false,0);; // izquierda-abajo
@@ -100,9 +103,8 @@ public class Tablero {
         vecinos += this.grid[xMas][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;     // derecha-arriba
         vecinos += this.grid[x][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;        // arriba
         vecinos += this.grid[xMenos][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;   // izqeruida-arriba
+        this.isTerm = true;
 
-        //this.shannon.addMap();
-        //this.shannon.reset();
         return vecinos;
     }
     /*
@@ -110,8 +112,14 @@ public class Tablero {
      */
     public int binarioAdd(boolean iAM, int ret)
     {
-
-        return iAM ? 0:ret;
+        if(!isTerm)
+            this.binary += ret;
+        else
+        {
+            this.shannon.addMap(this.binary);
+            this.binary = this.shannon.getBinario();
+        }
+        return iAM ? 0 : ret;
     }
 
     // Funciones de vida o muerte

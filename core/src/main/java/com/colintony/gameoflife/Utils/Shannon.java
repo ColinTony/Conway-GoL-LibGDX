@@ -29,8 +29,9 @@ public class Shannon {
     }
 
 
-    public void addMap()
+    public void addMap(String binary)
     {
+        this.binario = binary;
         this.binarioToConfig();
         if(!this.map.containsKey(this.config))
             this.map.put(this.config,1);
@@ -39,7 +40,7 @@ public class Shannon {
             int value = this.map.get(this.config);
             this.map.put(this.config,value++);
         }
-
+        this.reset();
     }
     // Convertir String binario a Decimal
     private void binarioToConfig()
@@ -52,7 +53,7 @@ public class Shannon {
         this.binario += numero;
         if(binario.length() == 9)
         {
-            this.addMap();
+            this.addMap(this.binario);
             this.writeTXTPlot();
             this.reset();
         }
@@ -60,8 +61,9 @@ public class Shannon {
     private void writeTXTPlot()
     {
         // Escribir el txt
+
     }
-    public void reset()
+    private void reset()
     {
         this.binario = "";
         this.config = 0;
