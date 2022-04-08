@@ -4,14 +4,24 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.colintony.gameoflife.Utils.ConfigGame;
 import com.colintony.gameoflife.Utils.DataInfo;
+import com.colintony.gameoflife.Utils.Shannon;
 
 import java.util.Arrays;
+import java.util.UUID;
 
 public class Tablero {
     private boolean grid[][];
-
+    private Shannon shannon;
+    private String fileNamePlots;
+    private boolean isTerm;
+    private String binary;
     public Tablero(float chance)
     {
+        this.isTerm = true;
+        this.shannon = new Shannon();
+
+
+
         this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
         createRandomWorld(chance);
     }
@@ -36,10 +46,6 @@ public class Tablero {
                     DataInfo.celulasMuertas++;
             }
         }
-    }
-    public void insertarConocida()
-    {
-
     }
     /*
         Creando un mundo Taroide
@@ -79,17 +85,35 @@ public class Tablero {
         int yMas = y+1>= heigth ? 0:y+1;
 
         int vecinos = 0;
-        vecinos += this.grid[x][yMas] ? 1:0;        // arriba
-        vecinos += this.grid[x][yMenos] ? 1:0;      // abajo
-        vecinos += this.grid[xMenos][y] ? 1:0;      // izquierda
-        vecinos += this.grid[xMas][y] ? 1:0;        // derecha
-        vecinos += this.grid[xMenos][yMenos] ? 1:0; // izquierda-abajo
-        vecinos += this.grid[xMenos][yMas] ? 1:0;   // izqeruida-arriba
-        vecinos += this.grid[xMas][yMas] ? 1:0;     // derecha-arriba
-        vecinos += this.grid[xMas][yMenos] ? 1:0;   // derecha-Abajo
+        this.binary = "";
+        this.isTerm = true;
+        vecinos += this.grid[xMas][yMenos] ? binarioAdd(false,1):binarioAdd(false,0);   // derecha-Abajo
+        vecinos += this.grid[x][yMenos] ? binarioAdd(false,1):binarioAdd(false,0);;      // abajo
+        vecinos += this.grid[xMenos][yMenos] ? binarioAdd(false,1):binarioAdd(false,0);; // izquierda-abajo
 
+
+        vecinos += this.grid[xMas][y] ? binarioAdd(false,1):binarioAdd(false,0);;        // derecha
+        vecinos += this.grid[x][y] ? binarioAdd(true,1):binarioAdd(true,0);;           // Centro
+        vecinos += this.grid[xMenos][y] ? binarioAdd(false,1):binarioAdd(false,0);;      // izquierda
+
+
+        vecinos += this.grid[xMas][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;     // derecha-arriba
+        vecinos += this.grid[x][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;        // arriba
+        vecinos += this.grid[xMenos][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;   // izqeruida-arriba
+
+        //this.shannon.addMap();
+        //this.shannon.reset();
         return vecinos;
     }
+    /*
+        Vecinos check-binario
+     */
+    public int binarioAdd(boolean iAM, int ret)
+    {
+
+        return iAM ? 0:ret;
+    }
+
     // Funciones de vida o muerte
     // xPos y yPos son las cordenadas de la celula en x-axis y y-axis
     public void die(boolean status,int xPos , int yPos)
@@ -172,8 +196,6 @@ public class Tablero {
         try{
             return this.grid[xPos+xOffset][yPos+yOffset] ? 1 : 0;
         }catch (IndexOutOfBoundsException e){
-
-
         }
         return 0;
     }
