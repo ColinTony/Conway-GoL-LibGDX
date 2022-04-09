@@ -1,3 +1,4 @@
+import sys
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib import style
@@ -8,7 +9,7 @@ fig = plt.figure()
 ax1 = fig.add_subplot(111)
 
 def animate(i):
-    graph_data = open('C:/Users/mrc0l/Documents/Complejos/GoL/core/src/main/java/plots/ejemplo.txt','r').read()
+    graph_data = open('C:/Users/mrc0l/Documents/Complejos/GoL/core/src/main/java/plots/'+sys.argv[1],'r').read()
     lines = graph_data.split('\n')
     xs = []
     ys = []

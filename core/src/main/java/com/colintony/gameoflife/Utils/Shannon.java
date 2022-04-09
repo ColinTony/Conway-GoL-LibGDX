@@ -99,4 +99,11 @@ public class Shannon {
         this.config = config;
     }
 
+    public String getPathFilePlots() {
+        return fileNamePlots;
+    }
+
+    public void setPathFilePlots(String pathFilePlots) {
+        this.pathFilePlots = pathFilePlots;
+    }
 }

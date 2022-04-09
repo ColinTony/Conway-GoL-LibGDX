@@ -12,19 +12,10 @@ import java.util.UUID;
 public class Tablero {
     private boolean grid[][];
     private Shannon shannon;
-    private String fileNamePlots;
-    private boolean isTerm;
     private String binary;
     public Tablero(float chance)
     {
-        this.isTerm = true;
         this.shannon = new Shannon();
-        UUID unique = UUID.randomUUID();
-        this.fileNamePlots = "plots-";
-        this.fileNamePlots += unique.toString();
-        this.fileNamePlots += ".json";
-
-
         this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
         createRandomWorld(chance);
     }
@@ -224,5 +215,10 @@ public class Tablero {
 
     public void txtMap() {
         this.shannon.writeTXTPlot();
+    }
+    public String getNameFile()
+    {
+        System.out.println(this.shannon.getPathFilePlots());
+        return this.shannon.getPathFilePlots();
     }
 }

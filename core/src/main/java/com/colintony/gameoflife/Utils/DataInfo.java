@@ -77,8 +77,9 @@ public class DataInfo {
     /*
         Charts
      */
-    public static void chart() throws IOException
+    public static void chart(String nameFile) throws IOException
     {
+
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -86,6 +87,8 @@ public class DataInfo {
                     List<String> command = new LinkedList<>();
                     command.add("C:/Program Files/Python3/python");
                     command.add(pathPythonScript);
+                    command.add(nameFile);
+                    System.out.println(nameFile);
                     //ProcessBuilder need to separate string into list string not one long string
                     ProcessBuilder pb = new ProcessBuilder(command);
                     System.out.println(command);

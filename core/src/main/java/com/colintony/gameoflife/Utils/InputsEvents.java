@@ -34,7 +34,7 @@ public class InputsEvents {
         {
             tablero.txtMap();
             try {
-                DataInfo.chart();
+                DataInfo.chart(tablero.getNameFile());
             } catch (IOException e) {
                 e.printStackTrace();
             }
