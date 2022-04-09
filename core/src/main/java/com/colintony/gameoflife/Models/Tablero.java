@@ -52,6 +52,7 @@ public class Tablero {
         for (int x = 0; x < this.grid[0].length; x++) {
             for (int y = 0; y < this.grid[0].length; y++) {
                 int vecinos = check(x,y);
+                //int vecinos = checkApariciones(x,y);
                 boolean status = this.grid[x][y];
 
                 if(status) // vivos
@@ -68,7 +69,7 @@ public class Tablero {
             }
         }
     }
-    public int check(int x, int y)
+    public int checkApariciones(int x, int y)
     {
         int width = this.grid.length;
         int heigth = this.grid[0].length;
@@ -96,6 +97,28 @@ public class Tablero {
         vecinos += this.grid[xMenos][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;   // izqeruida-arriba
 
         this.shannon.addMap(this.binary);
+        return vecinos;
+    }
+    public int check(int x, int y)
+    {
+        int width = this.grid.length;
+        int heigth = this.grid[0].length;
+
+        int xMenos = x - 1 < 0 ? width-1 : x-1;
+        int xMas = x+1 >= width?0:x+1;
+        int yMenos = y-1<0 ? heigth-1 : y-1;
+        int yMas = y+1>= heigth ? 0:y+1;
+
+        int vecinos = 0;
+        vecinos += this.grid[x][yMas] ? 1:0;        // arriba
+        vecinos += this.grid[x][yMenos] ? 1:0;      // abajo
+        vecinos += this.grid[xMenos][y] ? 1:0;      // izquierda
+        vecinos += this.grid[xMas][y] ? 1:0;        // derecha
+        vecinos += this.grid[xMenos][yMenos] ? 1:0; // izquierda-abajo
+        vecinos += this.grid[xMenos][yMas] ? 1:0;   // izqeruida-arriba
+        vecinos += this.grid[xMas][yMas] ? 1:0;     // derecha-arriba
+        vecinos += this.grid[xMas][yMenos] ? 1:0;   // derecha-Abajo
+
         return vecinos;
     }
     /*
