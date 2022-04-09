@@ -59,12 +59,11 @@ public class Shannon {
         // Escribir el txt
         FileHandle hadleFile = Gdx.files.absolute(this.pathFilePlots);
         for(int key : this.map.keySet())
-            hadleFile.writeString("key:"+key+","+this.map.get(key)+"\n",true);
+            hadleFile.writeString(DataInfo.generacion+","+key+","+this.map.get(key)+"\n",true);
 
     }
     public void imprimeMap()
     {
-        System.out.println("Valores del map");
         for(int key : this.map.keySet())
             System.out.println("key:"+key+","+this.map.get(key));
     }

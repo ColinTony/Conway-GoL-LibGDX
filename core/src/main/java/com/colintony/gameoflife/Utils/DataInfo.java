@@ -83,23 +83,23 @@ public class DataInfo {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
-                try {
-                    List<String> command = new LinkedList<>();
-                    command.add("C:/Program Files/Python3/python");
-                    command.add(pathPythonScript);
-                    command.add(nameFile);
-                    System.out.println(nameFile);
-                    //ProcessBuilder need to separate string into list string not one long string
-                    ProcessBuilder pb = new ProcessBuilder(command);
-                    System.out.println(command);
-                    Process p = pb.start(); // Start the process.
-                    int result = 0; // Wait for the process to finish.
+                Gdx.app.postRunnable(()->
+                {
+                    try {
+                        List<String> command = new LinkedList<>();
+                        command.add("C:/Program Files/Python3/python");
+                        command.add(pathPythonScript);
+                        command.add(nameFile);
+                        //ProcessBuilder need to separate string into list string not one long string
+                        ProcessBuilder pb = new ProcessBuilder(command);
+                        Process p = pb.start(); // Start the process.
 
-                    result = p.waitFor();
-                    System.out.println("Script executed successfully"+result);
-                }catch (InterruptedException | IOException e) {
-                    e.printStackTrace();
-                }
+                    }catch ( IOException e) {
+                        e.printStackTrace();
+                    }
+
+                });
+
             }
         });
         thread.start();
