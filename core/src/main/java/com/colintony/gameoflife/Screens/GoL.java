@@ -92,7 +92,7 @@ public class GoL extends PantallaAbstract implements Disposable {
 
         this.inputGameStatus();
         InputsEvents.inputConocidas(this.camera,this.dimensions,this.tablero,this.screenInfo.getConocida());
-        InputsEvents.inputsCamera(this.screenInfo,this.camera);
+        InputsEvents.inputsCamera(this.screenInfo,this.camera,this.tablero);
 
         this.batch.begin();
         if(this.screenInfo.isMostrarControles())

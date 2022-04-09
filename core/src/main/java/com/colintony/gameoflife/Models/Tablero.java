@@ -222,4 +222,8 @@ public class Tablero {
                 "grid=" + Arrays.toString(grid) +
                 '}';
     }
+
+    public void imprimeMap() {
+        this.shannon.imprimeMap();
+    }
 }

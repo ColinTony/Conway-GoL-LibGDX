@@ -5,13 +5,13 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Shannon {
-    private Map<Integer,Integer> map;
+    private HashMap<Integer,Integer> map;
     private String binario;
     private int config;
     private String fileNamePlots;
     private final String pathFilePlots="C:/Users/mrc0l/Documents/Complejos/GoL/core/src/main/java/plots/";
 
-    public Shannon(Map<Integer, Integer> map, String binario, int config) {
+    public Shannon(HashMap<Integer, Integer> map, String binario, int config) {
         this.map = map;
         this.binario = binario;
         this.config = config;
@@ -33,13 +33,9 @@ public class Shannon {
     {
         this.binario = binary;
         this.binarioToConfig();
-        if(!this.map.containsKey(this.config))
-            this.map.put(this.config,1);
-        else
-        {
-            int value = this.map.get(this.config);
-            this.map.put(this.config,value++);
-        }
+        int valor = this.map.containsKey(this.config) ? this.map.get(this.config):0;
+
+        this.map.put(this.config,valor++);
         this.reset();
     }
     // Convertir String binario a Decimal
@@ -48,20 +44,16 @@ public class Shannon {
         this.config = Integer.parseInt(this.binario,2);
     }
 
-    public void addBinaryChar(int numero)
-    {
-        this.binario += numero;
-        if(binario.length() == 9)
-        {
-            this.addMap(this.binario);
-            this.writeTXTPlot();
-            this.reset();
-        }
-    }
+
     private void writeTXTPlot()
     {
         // Escribir el txt
 
+    }
+    public void imprimeMap()
+    {
+        for(int key : this.map.keySet())
+            System.out.println("key:"+key+","+this.map.get(key));
     }
     private void reset()
     {
@@ -74,7 +66,7 @@ public class Shannon {
         return map;
     }
 
-    public void setMap(Map<Integer, Integer> map) {
+    public void setMap(HashMap<Integer, Integer> map) {
         this.map = map;
     }
 

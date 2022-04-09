@@ -19,7 +19,7 @@ public class InputsEvents {
     /*
      INOPUTSSS CAMERA
      */
-    public static void inputsCamera(ScreenInfo screenInfo, OrthographicCamera camera)
+    public static void inputsCamera(ScreenInfo screenInfo, OrthographicCamera camera,Tablero tablero)
     {
         if(Gdx.input.isKeyJustPressed(Input.Keys.I)) {
             if (screenInfo.getConocida() < screenInfo.getFigurasConocidas().length)
@@ -33,6 +33,7 @@ public class InputsEvents {
         if(Gdx.input.isKeyJustPressed(Input.Keys.V))
         {
             System.out.println("presionado");
+            tablero.imprimeMap();
             try {
                 DataInfo.chart();
             } catch (IOException e) {
