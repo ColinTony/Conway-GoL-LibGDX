@@ -8,7 +8,7 @@ public class ConfigGame {
     public static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
     public static int WIDTH_PANTALLA = screenSize.width;
     public static int HEIGTH_PANTALLA = screenSize.height;
-    public static int GRID_WIDTH = 400;
-    public static int GRID_HEIGTH = 400;
+    public static int GRID_WIDTH = 500;
+    public static int GRID_HEIGTH = 500;
 
 }

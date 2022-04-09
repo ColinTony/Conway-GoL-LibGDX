@@ -32,7 +32,6 @@ public class InputsEvents {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.V))
         {
-            System.out.println("presionado");
             tablero.imprimeMap();
             try {
                 DataInfo.chart();
