@@ -32,7 +32,7 @@ public class InputsEvents {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.V))
         {
-            tablero.imprimeMap();
+            tablero.txtMap();
             try {
                 DataInfo.chart();
             } catch (IOException e) {

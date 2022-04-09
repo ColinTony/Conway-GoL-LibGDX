@@ -1,5 +1,8 @@
 package com.colintony.gameoflife.Utils;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
+
 import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,9 +54,12 @@ public class Shannon {
     }
 
 
-    private void writeTXTPlot()
+    public void writeTXTPlot()
     {
         // Escribir el txt
+        FileHandle hadleFile = Gdx.files.absolute(this.pathFilePlots);
+        for(int key : this.map.keySet())
+            hadleFile.writeString("key:"+key+","+this.map.get(key)+"\n",true);
 
     }
     public void imprimeMap()
