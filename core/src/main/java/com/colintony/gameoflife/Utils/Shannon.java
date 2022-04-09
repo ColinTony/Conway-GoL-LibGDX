@@ -9,7 +9,7 @@ public class Shannon {
     private String binario;
     private int config;
     private String fileNamePlots;
-    private final String pathFilePlots="C:/Users/mrc0l/Documents/Complejos/GoL/core/src/main/java/plots/";
+    private String pathFilePlots="C:/Users/mrc0l/Documents/Complejos/GoL/core/src/main/java/plots/";
 
     public Shannon(HashMap<Integer, Integer> map, String binario, int config) {
         this.map = map;
@@ -22,7 +22,7 @@ public class Shannon {
         this.fileNamePlots = "plots-";
         this.fileNamePlots+=unique.toString();
         this.fileNamePlots+=".txt";
-
+        this.pathFilePlots+=this.fileNamePlots;
         this.map = new HashMap<Integer,Integer>();
         this.binario = "";
         this.config = 0;
@@ -33,9 +33,14 @@ public class Shannon {
     {
         this.binario = binary;
         this.binarioToConfig();
-        int valor = this.map.containsKey(this.config) ? this.map.get(this.config):0;
 
-        this.map.put(this.config,valor++);
+        if(this.map.containsKey(this.config))
+        {
+            int valor = this.map.get(this.config);
+            this.map.replace(this.config,valor++);
+        }else
+            this.map.put(this.config,1);
+
         this.reset();
     }
     // Convertir String binario a Decimal
@@ -52,6 +57,7 @@ public class Shannon {
     }
     public void imprimeMap()
     {
+        System.out.println("Valores del map");
         for(int key : this.map.keySet())
             System.out.println("key:"+key+","+this.map.get(key));
     }

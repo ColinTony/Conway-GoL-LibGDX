@@ -89,7 +89,7 @@ public class Tablero {
 
         int vecinos = 0;
         this.binary = "";
-        this.isTerm = false;
+
         vecinos += this.grid[xMas][yMenos] ? binarioAdd(false,1):binarioAdd(false,0);   // derecha-Abajo
         vecinos += this.grid[x][yMenos] ? binarioAdd(false,1):binarioAdd(false,0);;      // abajo
         vecinos += this.grid[xMenos][yMenos] ? binarioAdd(false,1):binarioAdd(false,0);; // izquierda-abajo
@@ -103,8 +103,8 @@ public class Tablero {
         vecinos += this.grid[xMas][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;     // derecha-arriba
         vecinos += this.grid[x][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;        // arriba
         vecinos += this.grid[xMenos][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;   // izqeruida-arriba
-        this.isTerm = true;
 
+        this.shannon.addMap(this.binary);
         return vecinos;
     }
     /*
@@ -112,13 +112,8 @@ public class Tablero {
      */
     public int binarioAdd(boolean iAM, int ret)
     {
-        if(!isTerm)
-            this.binary += ret;
-        else
-        {
-            this.shannon.addMap(this.binary);
-            this.binary = this.shannon.getBinario();
-        }
+        this.binary += ret;
+
         return iAM ? 0 : ret;
     }
 
