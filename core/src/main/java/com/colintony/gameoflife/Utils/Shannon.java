@@ -9,13 +9,13 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Shannon {
-    private HashMap<Integer,BigInteger> map;
+    private HashMap<Integer,Integer> map;
     private String binario;
     private int config;
     private String fileNamePlots;
     private String pathFilePlots="C:/Users/mrc0l/Documents/Complejos/GoL/core/src/main/java/plots/";
 
-    public Shannon(HashMap<Integer, BigInteger> map, String binario, int config) {
+    public Shannon(HashMap<Integer, Integer> map, String binario, int config) {
         this.map = map;
         this.binario = binario;
         this.config = config;
@@ -27,9 +27,21 @@ public class Shannon {
         this.fileNamePlots+=unique.toString();
         this.fileNamePlots+=".txt";
         this.pathFilePlots+=this.fileNamePlots;
-        this.map = new HashMap<Integer,BigInteger>();
+        this.map = new HashMap<Integer,Integer>();
         this.binario = "";
         this.config = 0;
+    }
+
+    public Shannon(HashMap<Integer, Integer> map, String binario, int config, String fileNamePlots, String pathFilePlots) {
+        this.map = map;
+        this.binario = binario;
+        this.config = config;
+        this.fileNamePlots = fileNamePlots;
+        this.pathFilePlots = pathFilePlots;
+    }
+
+    public Shannon(HashMap<Integer, Integer> map) {
+        this.map = map;
     }
 
 
@@ -40,10 +52,10 @@ public class Shannon {
 
         if(this.map.containsKey(this.config))
         {
-            BigInteger valor = (BigInteger) this.map.get(this.config);
-            this.map.replace(this.config,valor.add(BigInteger.ONE));
+            int valor = (int) this.map.get(this.config);
+            this.map.replace(this.config,valor+1);
         }else
-            this.map.put(this.config,BigInteger.ONE);
+            this.map.put(this.config,1);
 
         this.reset();
     }
@@ -74,11 +86,11 @@ public class Shannon {
     }
     // GETTERS AND SETTERS
 
-    public Map<Integer, BigInteger> getMap() {
+    public Map<Integer, Integer> getMap() {
         return map;
     }
 
-    public void setMap(HashMap<Integer, BigInteger> map) {
+    public void setMap(HashMap<Integer, Integer> map) {
         this.map = map;
     }
 

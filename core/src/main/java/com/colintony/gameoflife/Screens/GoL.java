@@ -24,12 +24,7 @@ public class GoL extends PantallaAbstract implements Disposable {
     private ScreenInfo screenInfo;
     private OrthographicCamera camera;
     private Tablero tablero;
-    private float R;
-    private float G;
-    private float B;
-    private float R_C;
-    private float G_C;
-    private float B_C;
+
     // Inicio GoL variables
     private ShapeRenderer renderer;
 
@@ -53,9 +48,6 @@ public class GoL extends PantallaAbstract implements Disposable {
 
     public GoL(MainMenu game) {
         super(game);
-        this.R = 1f;
-        this.G = 1f;
-        this.B = 1f;
 
         // Dibujo e Informacion
         this.batch = this.game.getSpriteBatch();
@@ -75,15 +67,15 @@ public class GoL extends PantallaAbstract implements Disposable {
         this.renderer = new ShapeRenderer();
         this.renderer.setAutoShapeType(true);
 
-        this.tablero = new Tablero(0.843f);
+        this.tablero = new Tablero(0f);
         this.dimensions = new Vector2(ConfigGame.WIDTH_PANTALLA / (float) this.tablero.getGrid()[0].length, ConfigGame.HEIGTH_PANTALLA / (float) this.tablero.getGrid().length);
     }
 
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(R,G,B,1);
-        this.renderer.setColor(new Color(R_C,G_C,B_C,1));
+        Gdx.gl.glClearColor(this.tablero.getR_T(),this.tablero.getG_T(),this.tablero.getB_T(),1);
+        this.renderer.setColor(new Color(this.tablero.getR_C(),this.tablero.getG_C(),this.tablero.getB_C(),1));
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
         batch.setProjectionMatrix(camera.combined);
@@ -154,15 +146,15 @@ public class GoL extends PantallaAbstract implements Disposable {
         // Cambiar colores aleatoriamente
         if(Gdx.input.isKeyJustPressed(Input.Keys.J))
         {
-            this.R = (float)Math.random();
-            this.G = (float)Math.random();
-            this.B = (float)Math.random();
+            this.tablero.setR_T((float)Math.random());
+            this.tablero.setG_T((float)Math.random());
+            this.tablero.setB_T((float)Math.random());
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.K))
         {
-            this.R_C = (float)Math.random();
-            this.G_C = (float)Math.random();
-            this.B_C = (float)Math.random();
+            this.tablero.setR_C((float)Math.random());
+            this.tablero.setG_C((float)Math.random());
+            this.tablero.setB_C((float)Math.random());
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.G))
             DataInfo.saveConfig(tablero);

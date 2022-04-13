@@ -13,15 +13,40 @@ public class Tablero {
     private boolean grid[][];
     private Shannon shannon;
     private String binary;
+
+    private float R_T;
+    private float G_T;
+    private float B_T;
+    private float R_C;
+    private float G_C;
+    private float B_C;
+
     public Tablero(float chance)
     {
         this.shannon = new Shannon();
         this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
         createRandomWorld(chance);
+        // Coloeres default Tablero
+        this.R_T = 1f;
+        this.G_T = 1f;
+        this.B_T = 1f;
+        // Colores default Celula
+        this.R_C = 0f;
+        this.G_C = 0f;
+        this.B_C = 0f;
     }
     public Tablero(){};
     public Tablero(boolean[][] grid) {
         this.grid = grid;
+    }
+    public Tablero(Shannon sh) {
+        this.shannon = sh;
+    }
+
+    public Tablero(boolean[][] grid, Shannon shannon, String binary) {
+        this.grid = grid;
+        this.shannon = shannon;
+        this.binary = binary;
     }
     /*
    Metodos para Crear el mundo
@@ -51,8 +76,8 @@ public class Tablero {
         DataInfo.generacion++;
         for (int x = 0; x < this.grid[0].length; x++) {
             for (int y = 0; y < this.grid[0].length; y++) {
-                int vecinos = check(x,y);
-                //int vecinos = checkApariciones(x,y);
+                //int vecinos = check(x,y);
+                int vecinos = checkApariciones(x,y);
                 boolean status = this.grid[x][y];
 
                 if(status) // vivos
@@ -99,6 +124,9 @@ public class Tablero {
         this.shannon.addMap(this.binary);
         return vecinos;
     }
+    /*
+
+     */
     public int check(int x, int y)
     {
         int width = this.grid.length;
@@ -121,6 +149,7 @@ public class Tablero {
 
         return vecinos;
     }
+
     /*
         Vecinos check-binario
      */
@@ -243,5 +272,53 @@ public class Tablero {
     {
         System.out.println(this.shannon.getPathFilePlots());
         return this.shannon.getPathFilePlots();
+    }
+
+    public float getR_T() {
+        return R_T;
+    }
+
+    public void setR_T(float r_T) {
+        R_T = r_T;
+    }
+
+    public float getG_T() {
+        return G_T;
+    }
+
+    public void setG_T(float g_T) {
+        G_T = g_T;
+    }
+
+    public float getB_T() {
+        return B_T;
+    }
+
+    public void setB_T(float b_T) {
+        B_T = b_T;
+    }
+
+    public float getR_C() {
+        return R_C;
+    }
+
+    public void setR_C(float r_C) {
+        R_C = r_C;
+    }
+
+    public float getG_C() {
+        return G_C;
+    }
+
+    public void setG_C(float g_C) {
+        G_C = g_C;
+    }
+
+    public float getB_C() {
+        return B_C;
+    }
+
+    public void setB_C(float b_C) {
+        B_C = b_C;
     }
 }

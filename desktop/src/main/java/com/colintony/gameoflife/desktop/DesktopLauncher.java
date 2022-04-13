@@ -18,11 +18,10 @@ public class DesktopLauncher {
 
     private static LwjglApplicationConfiguration getDefaultConfiguration() {
         LwjglApplicationConfiguration configuration = new LwjglApplicationConfiguration();
-        configuration.title = "gameoflife";
+        configuration.title = "sistemas complejos - Colin Heredia Luis Antonio";
         configuration.width = ConfigGame.WIDTH_PANTALLA;
         configuration.height = ConfigGame.HEIGTH_PANTALLA;
-        System.out.println("Pantalla heigth: " + configuration.height + "width: " + configuration.width);
-
+        configuration.foregroundFPS = 100;
         return configuration;
     }
 }
