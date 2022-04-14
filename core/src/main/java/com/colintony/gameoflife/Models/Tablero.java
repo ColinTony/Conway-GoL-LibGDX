@@ -261,10 +261,6 @@ public class Tablero {
                 '}';
     }
 
-    public void imprimeMap() {
-        this.shannon.imprimeMap();
-    }
-
     public void txtMap() {
         this.shannon.writeTXTPlot();
     }

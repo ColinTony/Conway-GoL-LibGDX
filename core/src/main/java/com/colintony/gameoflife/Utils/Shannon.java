@@ -66,18 +66,18 @@ public class Shannon {
     }
 
 
-    public void writeTXTPlot()
-    {
+    public void writeTXTPlot() {
         // Escribir el txt
         FileHandle hadleFile = Gdx.files.absolute(this.pathFilePlots);
-        for(int key : this.map.keySet())
-            hadleFile.writeString(DataInfo.generacion+","+key+","+this.map.get(key)+"\n",true);
-
-    }
-    public void imprimeMap()
-    {
-        for(int key : this.map.keySet())
-            System.out.println("key:"+key+","+this.map.get(key));
+        if (!hadleFile.exists()) {
+            for (int key : this.map.keySet())
+                hadleFile.writeString(DataInfo.generacion + "," + key + "," + this.map.get(key) + "\n", true);
+        }else
+        {
+            hadleFile.delete();
+            for (int key : this.map.keySet())
+                hadleFile.writeString(DataInfo.generacion + "," + key + "," + this.map.get(key) + "\n", true);
+        }
     }
     private void reset()
     {

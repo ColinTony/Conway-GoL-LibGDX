@@ -66,9 +66,6 @@ public class DataInfo {
             Json json = new Json();
             Tablero tabTmp = json.fromJson(Tablero.class,file);
             return tabTmp;
-        }else
-        {
-            System.out.println("No pude crear nada");
         }
 
         return tablero;

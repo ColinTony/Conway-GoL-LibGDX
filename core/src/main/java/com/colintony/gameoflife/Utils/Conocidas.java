@@ -3,6 +3,8 @@ package com.colintony.gameoflife.Utils;
 import com.badlogic.gdx.Gdx;
 import com.colintony.gameoflife.Models.Tablero;
 
+import javax.xml.crypto.Data;
+
 public class Conocidas {
 
     /*
@@ -25,6 +27,9 @@ public class Conocidas {
             grid_conocidas[x+5][y] = true;
             grid_conocidas[x+5][y+1] = true;
             grid_conocidas[x+4][y+2] = true;
+
+            DataInfo.celulasVivas += 9;
+            DataInfo.celulasMuertas -= 9;
 
             tablero.setGrid(grid_conocidas);
         }catch (IndexOutOfBoundsException e)
@@ -49,6 +54,9 @@ public class Conocidas {
             grid_conocidas[x+2][y] = true;
             grid_conocidas[x+2][y+1]=true;
             grid_conocidas[x+1][y+2]=true;
+
+            DataInfo.celulasVivas += 5;
+            DataInfo.celulasMuertas -= 5;
 
             tablero.setGrid(grid_conocidas);
         }catch (IndexOutOfBoundsException e)
@@ -78,7 +86,8 @@ public class Conocidas {
             grid_conocidas[x-1][y-2] = true;
             grid_conocidas[x+1][y-3] = true;
 
-
+            DataInfo.celulasVivas += 6;
+            DataInfo.celulasMuertas -= 6;
             tablero.setGrid(grid_conocidas);
         }catch (IndexOutOfBoundsException e)
         {
@@ -102,6 +111,9 @@ public class Conocidas {
      */
     public static void ociladorGalaxy(Tablero tablero,int x,int y)
     {
+
+        DataInfo.celulasVivas += 12*4;
+        DataInfo.celulasMuertas -= 12*4;
         try
         {
             boolean grid_conocidas[][] = tablero.getGrid();
@@ -150,7 +162,8 @@ public class Conocidas {
             grid_conocidas[x+4][y-2] = true;
             grid_conocidas[x+5][y-2] = true;
             grid_conocidas[x+2][y-1] = true;
-
+            DataInfo.celulasVivas += 7;
+            DataInfo.celulasMuertas -= 7;
             tablero.setGrid(grid_conocidas);
         }catch (IndexOutOfBoundsException e)
         {
@@ -161,10 +174,17 @@ public class Conocidas {
     {
         try
         {
-            if(tablero.getGrid()[x][y])
-                Gdx.app.postRunnable(()->tablero.getGrid()[x][y] = false);
-            else
-                Gdx.app.postRunnable(()->tablero.getGrid()[x][y] = true);
+            if(tablero.getGrid()[x][y]) {
+                Gdx.app.postRunnable(() -> tablero.getGrid()[x][y] = false);
+                DataInfo.celulasMuertas += 1;
+                DataInfo.celulasVivas += -1;
+            }
+            else {
+                Gdx.app.postRunnable(() -> tablero.getGrid()[x][y] = true);
+                DataInfo.celulasMuertas += -1;
+                DataInfo.celulasVivas += 1;
+
+            }
         }catch (IndexOutOfBoundsException e)
         {
             System.out.println(e);

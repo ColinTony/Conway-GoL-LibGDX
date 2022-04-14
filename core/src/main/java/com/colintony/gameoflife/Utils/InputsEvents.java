@@ -132,7 +132,6 @@ public class InputsEvents {
                         Gdx.app.postRunnable(()->Conocidas.acron(tablero,finalX,finalY));
                         break;
                     default:
-                        System.out.println("Ocurrio un error pero te pongo una celula");
                         Gdx.app.postRunnable(()->Conocidas.onlyCelula(tablero,finalX,finalY));
                         break;
                 }
