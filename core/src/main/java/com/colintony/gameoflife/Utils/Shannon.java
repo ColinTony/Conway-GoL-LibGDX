@@ -9,11 +9,10 @@ import java.util.Map;
 import java.util.UUID;
 
 public class Shannon {
+    private Graficas graficas;
     private HashMap<Integer,Integer> map;
     private String binario;
     private int config;
-    private String fileNamePlots;
-    private String pathFilePlots="C:/Users/mrc0l/Documents/Complejos/GoL/core/src/main/java/plots/";
 
     public Shannon(HashMap<Integer, Integer> map, String binario, int config) {
         this.map = map;
@@ -22,11 +21,7 @@ public class Shannon {
     }
     public Shannon()
     {
-        UUID unique = UUID.randomUUID();
-        this.fileNamePlots = "plots-";
-        this.fileNamePlots+=unique.toString();
-        this.fileNamePlots+=".txt";
-        this.pathFilePlots+=this.fileNamePlots;
+        this.graficas = new Graficas();
         this.map = new HashMap<Integer,Integer>();
         this.binario = "";
         this.config = 0;
@@ -36,8 +31,6 @@ public class Shannon {
         this.map = map;
         this.binario = binario;
         this.config = config;
-        this.fileNamePlots = fileNamePlots;
-        this.pathFilePlots = pathFilePlots;
     }
 
     public Shannon(HashMap<Integer, Integer> map) {
@@ -66,19 +59,7 @@ public class Shannon {
     }
 
 
-    public void writeTXTPlot() {
-        // Escribir el txt
-        FileHandle hadleFile = Gdx.files.absolute(this.pathFilePlots);
-        if (!hadleFile.exists()) {
-            for (int key : this.map.keySet())
-                hadleFile.writeString(DataInfo.generacion + "," + key + "," + this.map.get(key) + "\n", true);
-        }else
-        {
-            hadleFile.delete();
-            for (int key : this.map.keySet())
-                hadleFile.writeString(DataInfo.generacion + "," + key + "," + this.map.get(key) + "\n", true);
-        }
-    }
+
     private void reset()
     {
         this.binario = "";
@@ -111,10 +92,10 @@ public class Shannon {
     }
 
     public String getPathFilePlots() {
-        return fileNamePlots;
+        return this.graficas.getPathFilePlots();
     }
 
-    public void setPathFilePlots(String pathFilePlots) {
-        this.pathFilePlots = pathFilePlots;
+    public void escribirTXT() {
+        this.graficas.writeTXTPlot(this.map);
     }
 }

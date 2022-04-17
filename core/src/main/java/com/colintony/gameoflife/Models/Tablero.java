@@ -262,7 +262,7 @@ public class Tablero {
     }
 
     public void txtMap() {
-        this.shannon.writeTXTPlot();
+        this.shannon.escribirTXT();
     }
     public String getNameFile()
     {
