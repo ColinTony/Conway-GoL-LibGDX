@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -11,6 +12,7 @@ import java.util.UUID;
 public class Shannon {
     private Graficas graficas;
     private HashMap<Integer,Integer> map;
+    private ArrayList<String> listCelulas;
     private String binario;
     private int config;
 
@@ -23,6 +25,7 @@ public class Shannon {
     {
         this.graficas = new Graficas();
         this.map = new HashMap<Integer,Integer>();
+        this.listCelulas = new ArrayList<String>();
         this.binario = "";
         this.config = 0;
     }
@@ -58,6 +61,10 @@ public class Shannon {
         this.config = Integer.parseInt(this.binario,2);
     }
 
+    public void addListInfoCelulas(String add)
+    {
+        this.listCelulas.add(add);
+    }
 
 
     private void reset()
@@ -94,8 +101,14 @@ public class Shannon {
     public String getPathFilePlots() {
         return this.graficas.getPathFilePlots();
     }
+    public String getPathFilePlotsCelulas() {
+        return this.graficas.getFileNamePlotsCelulas();
+    }
 
     public void escribirTXT() {
         this.graficas.writeTXTPlot(this.map);
+    }
+    public void escribirTXTCelulas() {
+        this.graficas.writeTXTPlotCelulas(this.listCelulas);
     }
 }

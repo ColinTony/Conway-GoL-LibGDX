@@ -73,7 +73,7 @@ public class Tablero {
      */
     public void updateTaroide()
     {
-        DataInfo.generacion++;
+
         for (int x = 0; x < this.grid[0].length; x++) {
             for (int y = 0; y < this.grid[0].length; y++) {
                 //int vecinos = check(x,y);
@@ -93,6 +93,9 @@ public class Tablero {
                     alive(status,x,y);
             }
         }
+        DataInfo.generacion++;
+        String info = DataInfo.generacion + ","+DataInfo.generacion+","+DataInfo.celulasVivas+"\n";
+        this.shannon.addListInfoCelulas(info);
     }
     public int checkApariciones(int x, int y)
     {
@@ -264,10 +267,17 @@ public class Tablero {
     public void txtMap() {
         this.shannon.escribirTXT();
     }
+    public void txtCelulas()
+    {
+        this.shannon.escribirTXTCelulas();
+    }
     public String getNameFile()
     {
-        System.out.println(this.shannon.getPathFilePlots());
         return this.shannon.getPathFilePlots();
+    }
+    public String getNameFileCelulas()
+    {
+        return this.shannon.getPathFilePlotsCelulas();
     }
 
     public float getR_T() {
