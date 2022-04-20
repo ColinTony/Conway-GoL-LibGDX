@@ -99,7 +99,7 @@ public class Shannon {
     }
 
     public String getPathFilePlots() {
-        return this.graficas.getPathFilePlots();
+        return this.graficas.getFileNamePlots();
     }
     public String getPathFilePlotsCelulas() {
         return this.graficas.getFileNamePlotsCelulas();

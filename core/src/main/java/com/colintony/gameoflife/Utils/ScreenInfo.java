@@ -36,7 +36,7 @@ public class ScreenInfo {
     }
     public void dibujar(SpriteBatch batch)
     {
-        String dataInfo = modeCheckData ? "Mode check: Activado" : "Mode check: Desactivado";
+        String dataInfo = this.modeCheckData ? "Mode check: Activado" : "Mode check: Desactivado";
         String INSTRUCCIONES = " Zoom + : W | " +
                 "Zoom - : S | " + "Zoom max: C | "  + "Zoom min: Z | " +
                 "Pause: P | Reanudar: R | Derecha: Rigth | Izquierda: Left | " +
@@ -115,5 +115,13 @@ public class ScreenInfo {
 
     public void setFigurasConocidas(String[] figurasConocidas) {
         this.figurasConocidas = figurasConocidas;
+    }
+
+    public boolean isModeCheckData() {
+        return modeCheckData;
+    }
+
+    public void setModeCheckData(boolean modeCheckData) {
+        this.modeCheckData = modeCheckData;
     }
 }

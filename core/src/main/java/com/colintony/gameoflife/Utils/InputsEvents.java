@@ -33,6 +33,7 @@ public class InputsEvents {
         if(Gdx.input.isKeyJustPressed(Input.Keys.V))
         {
             tablero.txtMap();
+            System.out.println("Vemos");
             try {
                 DataInfo.chart(tablero.getNameFile());
             } catch (IOException e) {
@@ -53,8 +54,11 @@ public class InputsEvents {
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q))
             screenInfo.setModeBorders(!screenInfo.isModeBorders());
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.M))
-            tablero.setDataCheck(!tablero.isDataCheck());
+        if(Gdx.input.isKeyJustPressed(Input.Keys.M)) {
+            boolean tab = !tablero.isDataCheck();
+            tablero.setDataCheck(tab);
+            screenInfo.setModeCheckData(tab);
+        }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.D))
             screenInfo.setMostrarControles(!screenInfo.isMostrarControles());

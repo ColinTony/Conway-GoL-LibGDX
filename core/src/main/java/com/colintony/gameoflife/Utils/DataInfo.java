@@ -76,7 +76,7 @@ public class DataInfo {
      */
     public static void chart(String nameFile) throws IOException
     {
-
+        System.out.println("---"+nameFile);
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {

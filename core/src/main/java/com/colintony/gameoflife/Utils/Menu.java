@@ -36,9 +36,10 @@ public class Menu extends Actor
         this.posFlecha = new Position(this.posTexto.getX()-100,this.posTexto.getY()-25);
         this.initFlecha = new Position(this.posTexto.getX()-100,this.posTexto.getY()-25);
         // texto y seleccion
-        this.opcionesMenu = new String[2];
+        this.opcionesMenu = new String[3];
         this.opcionesMenu[0] = "Conway - Game Of Life";
-        this.opcionesMenu[1] = "Salir";
+        this.opcionesMenu[1] = "Automatas 2D";
+        this.opcionesMenu[2] = "Salir";
         this.seleccion = 0;
 
         // Felcha de seleccion

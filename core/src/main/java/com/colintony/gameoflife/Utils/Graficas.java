@@ -21,7 +21,7 @@ public class Graficas
         this.fileNamePlots+=unique.toString();
         this.fileNamePlotsCelulas += unique.toString();
         this.fileNamePlots+=".txt";
-        this.fileNamePlots+=".txt";
+        this.fileNamePlotsCelulas+=".txt";
         this.pathFilePlots+=this.fileNamePlots;
         this.pathFilePlotsCelulas+=this.fileNamePlotsCelulas;
     }

@@ -18,7 +18,6 @@ public class MenuInicio extends PantallaAbstract {
         super(game);
         this.batch = this.game.getSpriteBatch();
         this.menu = new Menu();
-        this.gameConways = new GoL(game);
     }
 
     @Override
@@ -49,14 +48,15 @@ public class MenuInicio extends PantallaAbstract {
                 case 0:
                     // practica Conway GameOfLife
                     this.menu.dispose();
+                    this.gameConways = new GoL(game);
                     this.game.setScreen(this.gameConways);
                     break;
 
                 case 1:
-                    // salir
+                    // Automatas de dos dimenasiones
                     break;
                 case 2:
-                    // salir
+                    // Salir
                     break;
 
                 default:
