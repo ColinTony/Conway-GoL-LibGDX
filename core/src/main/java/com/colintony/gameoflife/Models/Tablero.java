@@ -13,6 +13,7 @@ public class Tablero {
     private boolean grid[][];
     private Shannon shannon;
     private String binary;
+    private boolean isDataCheck;
 
     private float R_T;
     private float G_T;
@@ -24,6 +25,7 @@ public class Tablero {
     public Tablero(float chance)
     {
         this.shannon = new Shannon();
+        this.isDataCheck = true;
         this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
         createRandomWorld(chance);
         // Coloeres default Tablero
@@ -76,8 +78,12 @@ public class Tablero {
 
         for (int x = 0; x < this.grid[0].length; x++) {
             for (int y = 0; y < this.grid[0].length; y++) {
-                //int vecinos = check(x,y);
-                int vecinos = checkApariciones(x,y);
+                int vecinos;
+                if(this.isDataCheck)
+                    vecinos = checkApariciones(x,y);
+                else
+                    vecinos = check(x,y);
+
                 boolean status = this.grid[x][y];
 
                 if(status) // vivos
@@ -326,5 +332,13 @@ public class Tablero {
 
     public void setB_C(float b_C) {
         B_C = b_C;
+    }
+
+    public boolean isDataCheck() {
+        return isDataCheck;
+    }
+
+    public void setDataCheck(boolean dataCheck) {
+        isDataCheck = dataCheck;
     }
 }

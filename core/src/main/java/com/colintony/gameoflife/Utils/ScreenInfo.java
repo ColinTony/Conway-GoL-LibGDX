@@ -11,6 +11,7 @@ import javax.xml.crypto.Data;
 public class ScreenInfo {
     private boolean mostrarControles;
     private boolean modeBorders;
+    private boolean modeCheckData;
     private BitmapFont bitMapFont;
     private Position posController;
     private Position posInfoCell;
@@ -20,6 +21,7 @@ public class ScreenInfo {
     public ScreenInfo()
     {
         this.modeBorders = false;
+        this.modeCheckData = true;
         this.posInfoCell = new Position(0,50);
         this.mostrarControles = true;
         this.posController = new Position(5,ConfigGame.HEIGTH_PANTALLA-10);
@@ -34,12 +36,14 @@ public class ScreenInfo {
     }
     public void dibujar(SpriteBatch batch)
     {
+        String dataInfo = modeCheckData ? "Mode check: Activado" : "Mode check: Desactivado";
         String INSTRUCCIONES = " Zoom + : W | " +
                 "Zoom - : S | " + "Zoom max: C | "  + "Zoom min: Z | " +
                 "Pause: P | Reanudar: R | Derecha: Rigth | Izquierda: Left | " +
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
                 "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J | Reset figura colocar: space \n\n";
-        INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F | Ver grafica configuraciones: V | Ver grafica celulas vivas: B";
+        INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F | Ver grafica configuraciones: V | Ver grafica celulas vivas: B"+
+        "| Mode checkData: M ";
         INSTRUCCIONES += "| Cambiar figura colocar: I - ";
 
         if(conocida < this.figurasConocidas.length)
@@ -59,6 +63,7 @@ public class ScreenInfo {
         GENERACION += DataInfo.generacion;
 
         String INFO = CELULAR_MUERTAS + " ---- " + CELULAS_VIVAS +" ---- "+ GENERACION;
+        INFO += "\t\t        " + dataInfo;
         bitMapFont.setColor(Color.RED);
         bitMapFont.draw(batch,INSTRUCCIONES,this.posController.getX(),this.posController.getY());
         bitMapFont.draw(batch,INFO,this.posInfoCell.getX(),this.posInfoCell.getY());

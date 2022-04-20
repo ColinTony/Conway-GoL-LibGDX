@@ -53,6 +53,9 @@ public class InputsEvents {
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q))
             screenInfo.setModeBorders(!screenInfo.isModeBorders());
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.M))
+            tablero.setDataCheck(!tablero.isDataCheck());
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.D))
             screenInfo.setMostrarControles(!screenInfo.isMostrarControles());
 
