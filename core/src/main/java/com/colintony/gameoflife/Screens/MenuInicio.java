@@ -22,7 +22,7 @@ public class MenuInicio extends PantallaAbstract {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(1,1,1,1);
+        Gdx.gl.glClearColor(0.7f,0.7f,0.7f,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         this.batch.begin();
         this.menu.dibujarMenu(batch);

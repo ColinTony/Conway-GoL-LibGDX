@@ -2,6 +2,7 @@ package com.colintony.gameoflife.Utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -18,6 +19,7 @@ public class Menu extends Actor
     private Sprite sprite;
     private Position posFlecha;
     private Position initFlecha;
+    private Position posAuthorInfo;
     private int seleccion;
 
     // Texto
@@ -35,6 +37,7 @@ public class Menu extends Actor
         this.posTexto = new Position((ConfigGame.WIDTH_PANTALLA/2)-300,(ConfigGame.HEIGTH_PANTALLA/2)+200);
         this.posFlecha = new Position(this.posTexto.getX()-100,this.posTexto.getY()-25);
         this.initFlecha = new Position(this.posTexto.getX()-100,this.posTexto.getY()-25);
+        this.posAuthorInfo = new Position((ConfigGame.WIDTH_PANTALLA/2),(ConfigGame.HEIGTH_PANTALLA/2)+500);
         // texto y seleccion
         this.opcionesMenu = new String[3];
         this.opcionesMenu[0] = "Conway - Game Of Life";
@@ -50,15 +53,18 @@ public class Menu extends Actor
 
         // iniciando musica
         this.music.setLooping(true);
-        this.music.setVolume(0.25f);
+        this.music.setVolume(0.35f);
         this.music.play();
 
     }
 
     public void dibujarMenu(SpriteBatch batch)
     {
+        String dataAuthor = "Colin Heredia Luis Antonio - Sistemas Complejos - Escuela Superior de Computo";
         for(int i = 0; i<this.opcionesMenu.length; i++)
             bitMapFont.draw(batch,this.opcionesMenu[i],this.posTexto.getX(),this.posTexto.getY()-(i*50));
+
+        bitMapFont.draw(batch,dataAuthor,this.posAuthorInfo.getX()-dataAuthor.length(),this.posAuthorInfo.getY());
 
         this.sprite.draw(batch);
     }
