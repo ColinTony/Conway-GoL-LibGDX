@@ -18,12 +18,15 @@ import com.colintony.gameoflife.Utils.DataInfo;
 import com.colintony.gameoflife.Utils.InputsEvents;
 import com.colintony.gameoflife.Utils.ScreenInfo;
 
+import javax.swing.JOptionPane;
+
 public class GoL extends PantallaAbstract implements Disposable {
     private SpriteBatch batch;
     private DataInfo dataInfo;
     private ScreenInfo screenInfo;
     private OrthographicCamera camera;
     private Tablero tablero;
+
 
     // Inicio GoL variables
     private ShapeRenderer renderer;
@@ -165,6 +168,13 @@ public class GoL extends PantallaAbstract implements Disposable {
             this.pause();
             this.tablero = DataInfo.loadConfig(this.tablero);
         }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.X))
+        {
+            float respuesta = Float.parseFloat(JOptionPane.showInputDialog("Densidad de celulas vivas: ", "0.8"));
+            this.tablero = new Tablero(respuesta);
+        }
+
     }
 
     @Override

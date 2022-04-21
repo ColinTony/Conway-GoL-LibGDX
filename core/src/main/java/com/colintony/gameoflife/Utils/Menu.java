@@ -9,9 +9,11 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.colintony.gameoflife.Models.Position;
-
+// TODO Lo ideal seria extender o tener una interfaz de Menu para un codigo mas limpio y estructurado.
 public class Menu extends Actor
 {
+    //TODO : Modificar para mostrar el menu del automata2D
+    private boolean loadMenu;
     // musica
     private Music music;
     // sprites y texturas
@@ -28,6 +30,26 @@ public class Menu extends Actor
     private String opcionesMenu[];
 
     public Menu()
+    {
+        this.loadMenu = true;
+        if(this.loadMenu)
+            this.loadMainMenu();
+
+
+    }
+
+    public void dibujarMenu(SpriteBatch batch)
+    {
+        String dataAuthor = "Colin Heredia Luis Antonio - Sistemas Complejos - Escuela Superior de Computo";
+        for(int i = 0; i<this.opcionesMenu.length; i++)
+            bitMapFont.draw(batch,this.opcionesMenu[i],this.posTexto.getX(),this.posTexto.getY()-(i*50));
+
+        bitMapFont.draw(batch,dataAuthor,this.posAuthorInfo.getX()-dataAuthor.length(),this.posAuthorInfo.getY());
+
+        this.sprite.draw(batch);
+    }
+
+    private void loadMainMenu()
     {
         // musica
         this.music = Gdx.audio.newMusic(Gdx.files.internal("menu8bit.mp3"));
@@ -55,18 +77,6 @@ public class Menu extends Actor
         this.music.setLooping(true);
         this.music.setVolume(0.35f);
         this.music.play();
-
-    }
-
-    public void dibujarMenu(SpriteBatch batch)
-    {
-        String dataAuthor = "Colin Heredia Luis Antonio - Sistemas Complejos - Escuela Superior de Computo";
-        for(int i = 0; i<this.opcionesMenu.length; i++)
-            bitMapFont.draw(batch,this.opcionesMenu[i],this.posTexto.getX(),this.posTexto.getY()-(i*50));
-
-        bitMapFont.draw(batch,dataAuthor,this.posAuthorInfo.getX()-dataAuthor.length(),this.posAuthorInfo.getY());
-
-        this.sprite.draw(batch);
     }
 
 
