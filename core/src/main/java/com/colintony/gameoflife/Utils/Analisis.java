@@ -50,8 +50,9 @@ public class Analisis {
 
         if(this.map.containsKey(this.config))
         {
-            int valor = (int) this.map.get(this.config);
-            this.map.replace(this.config,valor+1);
+            int valor = this.map.get(this.config);
+            valor++;
+            this.map.replace(this.config,valor);
         }else
             this.map.put(this.config,1);
 
