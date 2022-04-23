@@ -34,7 +34,7 @@ public class ScreenInfo {
                 "Ocilador - Clock",
                 "Config - Acron"};
     }
-    public void dibujar(SpriteBatch batch)
+    public void dibujar(SpriteBatch batch,int s_min, int s_max,int b_min, int b_max)
     {
         String dataInfo = this.modeCheckData ? "Mode check: Activado" : "Mode check: Desactivado";
         String INSTRUCCIONES = " Zoom + : W | " +
@@ -43,7 +43,7 @@ public class ScreenInfo {
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
                 "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J | Reset figura colocar: space \n\n";
         INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F | Ver grafica configuraciones: V | Ver grafica celulas vivas: B"+
-        "| Mode checkData: M | Nuevo tablero con densidad: X";
+        "| Mode checkData: M | Nuevo tablero con densidad: X | Cambiar reglas : L";
         INSTRUCCIONES += "| Cambiar figura colocar: I - ";
 
         if(conocida < this.figurasConocidas.length)
@@ -63,7 +63,8 @@ public class ScreenInfo {
         GENERACION += DataInfo.generacion;
 
         String INFO = CELULAR_MUERTAS + " ---- " + CELULAS_VIVAS +" ---- "+ GENERACION;
-        INFO += "\t\t        " + dataInfo;
+        INFO += "          " + dataInfo;
+        INFO += "          R(" + s_min +","+s_max+","+b_min+","+b_max+")";
         bitMapFont.setColor(Color.RED);
         bitMapFont.draw(batch,INSTRUCCIONES,this.posController.getX(),this.posController.getY());
         bitMapFont.draw(batch,INFO,this.posInfoCell.getX(),this.posInfoCell.getY());

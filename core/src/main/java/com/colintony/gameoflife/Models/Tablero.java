@@ -14,6 +14,10 @@ public class Tablero {
     private Shannon shannon;
     private String binary;
     private boolean isDataCheck;
+    private int s_min;
+    private int s_max;
+    private int b_min;
+    private int b_max;
 
     private float R_T;
     private float G_T;
@@ -24,10 +28,35 @@ public class Tablero {
 
     public Tablero(float chance)
     {
+        this.s_min = 2;
+        this.s_max = 3;
+        this.b_min = 3;
+        this.b_max = 3;
+
         this.shannon = new Shannon();
         this.isDataCheck = true;
         this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
         createRandomWorld(chance);
+        // Coloeres default Tablero
+        this.R_T = 1f;
+        this.G_T = 1f;
+        this.B_T = 1f;
+        // Colores default Celula
+        this.R_C = 0f;
+        this.G_C = 0f;
+        this.B_C = 0f;
+    }
+    public Tablero(int s_min,int s_max,int b_min,int b_max)
+    {
+        this.s_min = s_min;
+        this.s_max = s_max;
+        this.b_min = b_min;
+        this.b_max = b_max;
+
+        this.shannon = new Shannon();
+        this.isDataCheck = true;
+        this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
+        createRandomWorld(0f);
         // Coloeres default Tablero
         this.R_T = 1f;
         this.G_T = 1f;
@@ -85,23 +114,31 @@ public class Tablero {
                     vecinos = check(x,y);
 
                 boolean status = this.grid[x][y];
-
-                if(status) // vivos
-                {
-                    if(vecinos == 2 || vecinos == 3)
-                        alive(status,x,y);
-                    if(vecinos < 2)
-                        die(status,x,y);
-                    if(vecinos > 3)
-                        die(status,x,y);
-                }else
-                if(vecinos == 3)
-                    alive(status,x,y);
+                reglasCheck(vecinos,status,x,y);
             }
         }
         DataInfo.generacion++;
         String info = DataInfo.generacion + ","+DataInfo.generacion+","+DataInfo.celulasVivas+"\n";
         this.shannon.addListInfoCelulas(info);
+    }
+    // Default regla R(S_min,S_max,B_min,B_max).
+    // R(2,3,3,3).
+    private void reglasCheck(int vecinos,boolean status,int x,int y)
+    {
+
+        if(status)
+        {
+            if((this.s_min<=vecinos) && (vecinos <= this.s_max))
+                alive(status,x,y);
+            else
+                die(status,x,y);
+        }else
+        {
+            if((this.b_min<=vecinos) && (vecinos <= this.s_max))
+                alive(status,x,y);
+            else
+                die(status,x,y);
+        }
     }
     public int checkApariciones(int x, int y)
     {
@@ -336,6 +373,38 @@ public class Tablero {
 
     public boolean isDataCheck() {
         return isDataCheck;
+    }
+
+    public int getS_min() {
+        return s_min;
+    }
+
+    public void setS_min(int s_min) {
+        this.s_min = s_min;
+    }
+
+    public int getS_max() {
+        return s_max;
+    }
+
+    public void setS_max(int s_max) {
+        this.s_max = s_max;
+    }
+
+    public int getB_min() {
+        return b_min;
+    }
+
+    public void setB_min(int b_min) {
+        this.b_min = b_min;
+    }
+
+    public int getB_max() {
+        return b_max;
+    }
+
+    public void setB_max(int b_max) {
+        this.b_max = b_max;
     }
 
     public void setDataCheck(boolean dataCheck) {

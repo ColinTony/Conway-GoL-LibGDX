@@ -91,7 +91,7 @@ public class GoL extends PantallaAbstract implements Disposable {
 
         this.batch.begin();
         if(this.screenInfo.isMostrarControles())
-            this.screenInfo.dibujar(this.batch);
+            this.screenInfo.dibujar(this.batch,this.tablero.getS_min(),this.tablero.getS_max(),this.tablero.getB_min(),this.tablero.getB_max());
         this.batch.end();
         if(this.screenInfo.isModeBorders())
             this.renderer.begin(ShapeRenderer.ShapeType.Line);
@@ -171,8 +171,20 @@ public class GoL extends PantallaAbstract implements Disposable {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.X))
         {
+            this.state = GoL.STATE.PAUSE;
             float respuesta = Float.parseFloat(JOptionPane.showInputDialog("Densidad de celulas vivas: ", "0.8"));
             this.tablero = new Tablero(respuesta);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.L))
+        {
+            this.state = GoL.STATE.PAUSE;
+            String respuesta = JOptionPane.showInputDialog("Reglas R(S_min,S_max,B_min,B_max): ", "2,3,3,3");
+            String[]valores = respuesta.split(",");
+            System.out.println("s_min:"+valores[0]+" s_max:"+valores[1]+" b_min:"+valores[2]+" b_max:"+valores[3]);
+            this.tablero.setS_min(Integer.parseInt(valores[0]));
+            this.tablero.setS_max(Integer.parseInt(valores[1]));
+            this.tablero.setB_min(Integer.parseInt(valores[2]));
+            this.tablero.setB_min(Integer.parseInt(valores[3]));
         }
 
     }
