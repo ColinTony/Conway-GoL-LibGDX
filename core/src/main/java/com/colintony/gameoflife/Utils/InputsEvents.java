@@ -49,6 +49,15 @@ public class InputsEvents {
                 e.printStackTrace();
             }
         }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.E))
+        {
+            tablero.txtCelulasLog();
+            try {
+                DataInfo.chart(tablero.getNameFileCelulasLog());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q))
             screenInfo.setModeBorders(!screenInfo.isModeBorders());

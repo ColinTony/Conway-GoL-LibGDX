@@ -44,7 +44,7 @@ public class ScreenInfo {
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
                 "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J | Reset figura colocar: space \n\n";
         INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F | Ver grafica configuraciones: V | Ver grafica celulas vivas: B"+
-        "| Mode checkData: M | Nuevo tablero con densidad: X | Cambiar reglas : L | Reset tablero 0f : H";
+        "| Ver grafica log: E | Mode checkData: M | Nuevo tablero con densidad: X | Cambiar reglas : L | Reset tablero 0f : H";
         INSTRUCCIONES += "| Cambiar figura colocar: I - ";
 
         if(conocida < this.figurasConocidas.length)

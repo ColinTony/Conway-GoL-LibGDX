@@ -2,16 +2,12 @@ package com.colintony.gameoflife.Models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
-import com.colintony.gameoflife.Utils.ConfigGame;
 import com.colintony.gameoflife.Utils.DataInfo;
-import com.colintony.gameoflife.Utils.Shannon;
-
-import java.util.Arrays;
-import java.util.UUID;
+import com.colintony.gameoflife.Utils.Analisis;
 
 public class Tablero {
     private boolean grid[][];
-    private Shannon shannon;
+    private Analisis analisis;
     private String binary;
     private boolean isDataCheck;
     private int widthGrid;
@@ -37,7 +33,7 @@ public class Tablero {
         this.b_min = 3;
         this.b_max = 3;
 
-        this.shannon = new Shannon();
+        this.analisis = new Analisis();
         this.isDataCheck = true;
         this.grid = new boolean[this.widthGrid][this.heigthGrid];
         createRandomWorld(chance);
@@ -59,7 +55,7 @@ public class Tablero {
         this.b_min = b_min;
         this.b_max = b_max;
 
-        this.shannon = new Shannon();
+        this.analisis = new Analisis();
         this.isDataCheck = true;
         this.grid = new boolean[this.widthGrid][this.heigthGrid];
         createRandomWorld(0f);
@@ -76,13 +72,13 @@ public class Tablero {
     public Tablero(boolean[][] grid) {
         this.grid = grid;
     }
-    public Tablero(Shannon sh) {
-        this.shannon = sh;
+    public Tablero(Analisis sh) {
+        this.analisis = sh;
     }
 
-    public Tablero(boolean[][] grid, Shannon shannon, String binary) {
+    public Tablero(boolean[][] grid, Analisis analisis, String binary) {
         this.grid = grid;
-        this.shannon = shannon;
+        this.analisis = analisis;
         this.binary = binary;
     }
     /*
@@ -124,8 +120,10 @@ public class Tablero {
             }
         }
         DataInfo.generacion++;
-        String info = DataInfo.generacion + ","+DataInfo.generacion+","+DataInfo.celulasVivas+"\n";
-        this.shannon.addListInfoCelulas(info);
+        String info = "Celulas vivas" + ","+DataInfo.generacion+","+DataInfo.celulasVivas+"\n";
+        String infoLog = "Logaritmo" + ","+DataInfo.generacion+","+Math.log10(DataInfo.celulasVivas)+"\n";
+        this.analisis.addListInfoCelulas(info);
+        this.analisis.addListInfoCelulasLog(infoLog);
     }
     // Default regla R(S_min,S_max,B_min,B_max).
     // R(2,3,3,3).
@@ -173,7 +171,7 @@ public class Tablero {
         vecinos += this.grid[x][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;        // arriba
         vecinos += this.grid[xMenos][yMas] ? binarioAdd(false,1):binarioAdd(false,0);;   // izqeruida-arriba
 
-        this.shannon.addMap(this.binary);
+        this.analisis.addMap(this.binary);
         return vecinos;
     }
     /*
@@ -308,19 +306,26 @@ public class Tablero {
 
 
     public void txtMap() {
-        this.shannon.escribirTXT();
+        this.analisis.escribirTXT();
     }
     public void txtCelulas()
     {
-        this.shannon.escribirTXTCelulas();
+        this.analisis.escribirTXTCelulas();
+    }
+    public void txtCelulasLog()
+    {
+        this.analisis.escribirTXTCelulasLog();
     }
     public String getNameFile()
     {
-        return this.shannon.getPathFilePlots();
+        return this.analisis.getPathFilePlots();
     }
     public String getNameFileCelulas()
     {
-        return this.shannon.getPathFilePlotsCelulas();
+        return this.analisis.getPathFilePlotsCelulas();
+    }
+    public String getNameFileCelulasLog() {
+        return this.analisis.getPathFilePlotsCelulasLog();
     }
 
     public float getR_T() {

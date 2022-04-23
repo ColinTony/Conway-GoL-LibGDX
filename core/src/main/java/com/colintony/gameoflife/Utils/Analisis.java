@@ -9,34 +9,36 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-public class Shannon {
+public class Analisis {
     private Graficas graficas;
     private HashMap<Integer,Integer> map;
     private ArrayList<String> listCelulas;
+    private ArrayList<String> listCelulasLog;
     private String binario;
     private int config;
 
-    public Shannon(HashMap<Integer, Integer> map, String binario, int config) {
+    public Analisis(HashMap<Integer, Integer> map, String binario, int config) {
         this.map = map;
         this.binario = binario;
         this.config = config;
     }
-    public Shannon()
+    public Analisis()
     {
         this.graficas = new Graficas();
         this.map = new HashMap<Integer,Integer>();
         this.listCelulas = new ArrayList<String>();
+        this.listCelulasLog = new ArrayList<String>();
         this.binario = "";
         this.config = 0;
     }
 
-    public Shannon(HashMap<Integer, Integer> map, String binario, int config, String fileNamePlots, String pathFilePlots) {
+    public Analisis(HashMap<Integer, Integer> map, String binario, int config, String fileNamePlots, String pathFilePlots) {
         this.map = map;
         this.binario = binario;
         this.config = config;
     }
 
-    public Shannon(HashMap<Integer, Integer> map) {
+    public Analisis(HashMap<Integer, Integer> map) {
         this.map = map;
     }
 
@@ -65,7 +67,10 @@ public class Shannon {
     {
         this.listCelulas.add(add);
     }
-
+    public void addListInfoCelulasLog(String add)
+    {
+        this.listCelulasLog.add(add);
+    }
 
     private void reset()
     {
@@ -104,11 +109,16 @@ public class Shannon {
     public String getPathFilePlotsCelulas() {
         return this.graficas.getFileNamePlotsCelulas();
     }
+    public String getPathFilePlotsCelulasLog(){return this.graficas.getFileNamePlotsLog();}
 
     public void escribirTXT() {
-        this.graficas.writeTXTPlot(this.map);
+        this.graficas.writeTXTPlotConfig(this.map);
     }
     public void escribirTXTCelulas() {
         this.graficas.writeTXTPlotCelulas(this.listCelulas);
+    }
+    public void escribirTXTCelulasLog()
+    {
+        this.graficas.writeTXTPlotLog(this.listCelulasLog);
     }
 }

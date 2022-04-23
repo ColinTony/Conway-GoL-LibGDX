@@ -31,8 +31,6 @@ public class DataInfo {
      */
     public static void saveConfig(Tablero tablero)
     {
-        // TODO: Guardar colores y crear un png
-
         Json json = new Json();
         String tableroJson = json.toJson(tablero);
         UUID unique = UUID.randomUUID();
