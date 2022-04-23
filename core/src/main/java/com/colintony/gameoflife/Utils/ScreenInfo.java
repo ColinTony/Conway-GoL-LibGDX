@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.colintony.gameoflife.Models.Position;
+import com.colintony.gameoflife.Screens.GoL;
 
 import javax.xml.crypto.Data;
 
@@ -32,9 +33,9 @@ public class ScreenInfo {
                 "Nave - Glider",
                 "Ocilador - Kok's Galaxy",
                 "Ocilador - Clock",
-                "Config - Acron"};
+                "Config - Acorn"};
     }
-    public void dibujar(SpriteBatch batch,int s_min, int s_max,int b_min, int b_max)
+    public void dibujar(SpriteBatch batch, int s_min, int s_max, int b_min, int b_max, GoL.STATE state)
     {
         String dataInfo = this.modeCheckData ? "Mode check: Activado" : "Mode check: Desactivado";
         String INSTRUCCIONES = " Zoom + : W | " +
@@ -43,7 +44,7 @@ public class ScreenInfo {
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
                 "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J | Reset figura colocar: space \n\n";
         INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F | Ver grafica configuraciones: V | Ver grafica celulas vivas: B"+
-        "| Mode checkData: M | Nuevo tablero con densidad: X | Cambiar reglas : L";
+        "| Mode checkData: M | Nuevo tablero con densidad: X | Cambiar reglas : L | Reset tablero 0f : H";
         INSTRUCCIONES += "| Cambiar figura colocar: I - ";
 
         if(conocida < this.figurasConocidas.length)
@@ -65,6 +66,7 @@ public class ScreenInfo {
         String INFO = CELULAR_MUERTAS + " ---- " + CELULAS_VIVAS +" ---- "+ GENERACION;
         INFO += "          " + dataInfo;
         INFO += "          R(" + s_min +","+s_max+","+b_min+","+b_max+")";
+        INFO += "          Estado: "+ state;
         bitMapFont.setColor(Color.RED);
         bitMapFont.draw(batch,INSTRUCCIONES,this.posController.getX(),this.posController.getY());
         bitMapFont.draw(batch,INFO,this.posInfoCell.getX(),this.posInfoCell.getY());

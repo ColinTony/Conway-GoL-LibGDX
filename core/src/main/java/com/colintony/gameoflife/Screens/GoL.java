@@ -70,7 +70,7 @@ public class GoL extends PantallaAbstract implements Disposable {
         this.renderer = new ShapeRenderer();
         this.renderer.setAutoShapeType(true);
 
-        this.tablero = new Tablero(0f);
+        this.tablero = new Tablero(0f,500,500);
         this.dimensions = new Vector2(ConfigGame.WIDTH_PANTALLA / (float) this.tablero.getGrid()[0].length, ConfigGame.HEIGTH_PANTALLA / (float) this.tablero.getGrid().length);
     }
 
@@ -91,7 +91,7 @@ public class GoL extends PantallaAbstract implements Disposable {
 
         this.batch.begin();
         if(this.screenInfo.isMostrarControles())
-            this.screenInfo.dibujar(this.batch,this.tablero.getS_min(),this.tablero.getS_max(),this.tablero.getB_min(),this.tablero.getB_max());
+            this.screenInfo.dibujar(this.batch,this.tablero.getS_min(),this.tablero.getS_max(),this.tablero.getB_min(),this.tablero.getB_max(),this.state);
         this.batch.end();
         if(this.screenInfo.isModeBorders())
             this.renderer.begin(ShapeRenderer.ShapeType.Line);
@@ -173,7 +173,24 @@ public class GoL extends PantallaAbstract implements Disposable {
         {
             this.state = GoL.STATE.PAUSE;
             float respuesta = Float.parseFloat(JOptionPane.showInputDialog("Densidad de celulas vivas: ", "0.8"));
-            this.tablero = new Tablero(respuesta);
+            this.tablero = new Tablero(respuesta,this.tablero.getWidthGrid(),this.tablero.getHeigthGrid());
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.H))
+        {
+            this.state = GoL.STATE.PAUSE;
+            String respuesta = JOptionPane.showInputDialog("tablero 500x500: ", "500x500");
+            respuesta = respuesta.trim();
+            String[] tabTam = respuesta.split("x");
+            int w = Integer.parseInt(tabTam[0]);
+            int h = Integer.parseInt(tabTam[1]);
+            this.tablero = new Tablero(0f,w,h);
+            // iniciando la cmaara
+            this.camera = new OrthographicCamera();
+            this.camera.setToOrtho(false, ConfigGame.WIDTH_PANTALLA,ConfigGame.HEIGTH_PANTALLA);
+            this.camera.translate(0,0);
+            this.camera.update();
+            this.dimensions = new Vector2(ConfigGame.WIDTH_PANTALLA / (float) this.tablero.getGrid()[0].length, ConfigGame.HEIGTH_PANTALLA / (float) this.tablero.getGrid().length);
+            this.tablero.update();
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.L))
         {
@@ -184,7 +201,7 @@ public class GoL extends PantallaAbstract implements Disposable {
             this.tablero.setS_min(Integer.parseInt(valores[0]));
             this.tablero.setS_max(Integer.parseInt(valores[1]));
             this.tablero.setB_min(Integer.parseInt(valores[2]));
-            this.tablero.setB_min(Integer.parseInt(valores[3]));
+            this.tablero.setB_max(Integer.parseInt(valores[3]));
         }
 
     }

@@ -14,6 +14,8 @@ public class Tablero {
     private Shannon shannon;
     private String binary;
     private boolean isDataCheck;
+    private int widthGrid;
+    private int heigthGrid;
     private int s_min;
     private int s_max;
     private int b_min;
@@ -26,8 +28,10 @@ public class Tablero {
     private float G_C;
     private float B_C;
 
-    public Tablero(float chance)
+    public Tablero(float chance,int widthGrid, int heigthGrid)
     {
+        this.widthGrid = widthGrid;
+        this.heigthGrid = heigthGrid;
         this.s_min = 2;
         this.s_max = 3;
         this.b_min = 3;
@@ -35,7 +39,7 @@ public class Tablero {
 
         this.shannon = new Shannon();
         this.isDataCheck = true;
-        this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
+        this.grid = new boolean[this.widthGrid][this.heigthGrid];
         createRandomWorld(chance);
         // Coloeres default Tablero
         this.R_T = 1f;
@@ -46,8 +50,10 @@ public class Tablero {
         this.G_C = 0f;
         this.B_C = 0f;
     }
-    public Tablero(int s_min,int s_max,int b_min,int b_max)
+    public Tablero(int s_min,int s_max,int b_min,int b_max,int widthGrid, int heigthGrid)
     {
+        this.widthGrid = widthGrid;
+        this.heigthGrid = heigthGrid;
         this.s_min = s_min;
         this.s_max = s_max;
         this.b_min = b_min;
@@ -55,7 +61,7 @@ public class Tablero {
 
         this.shannon = new Shannon();
         this.isDataCheck = true;
-        this.grid = new boolean[ConfigGame.GRID_WIDTH][ConfigGame.GRID_HEIGTH];
+        this.grid = new boolean[this.widthGrid][this.heigthGrid];
         createRandomWorld(0f);
         // Coloeres default Tablero
         this.R_T = 1f;
@@ -300,12 +306,6 @@ public class Tablero {
         this.grid = grid;
     }
 
-    @Override
-    public String toString() {
-        return "Tablero{" +
-                "grid=" + Arrays.toString(grid) +
-                '}';
-    }
 
     public void txtMap() {
         this.shannon.escribirTXT();
@@ -405,6 +405,22 @@ public class Tablero {
 
     public void setB_max(int b_max) {
         this.b_max = b_max;
+    }
+
+    public int getWidthGrid() {
+        return widthGrid;
+    }
+
+    public void setWidthGrid(int widthGrid) {
+        this.widthGrid = widthGrid;
+    }
+
+    public int getHeigthGrid() {
+        return heigthGrid;
+    }
+
+    public void setHeigthGrid(int heigthGrid) {
+        this.heigthGrid = heigthGrid;
     }
 
     public void setDataCheck(boolean dataCheck) {
