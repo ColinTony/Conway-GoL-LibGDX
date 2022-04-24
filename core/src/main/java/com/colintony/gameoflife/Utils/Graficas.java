@@ -24,7 +24,7 @@ public class Graficas
         UUID unique = UUID.randomUUID();
         this.fileNamePlotsCelulas = "plots-celulas-";
         this.fileNamePlotsLog = "plots-log-";
-        this.fileNamePlots = "plots-configs-";
+        this.fileNamePlots = "plots-shannon-";
 
         this.fileNamePlots  +=unique.toString();
         this.fileNamePlotsCelulas += unique.toString();
