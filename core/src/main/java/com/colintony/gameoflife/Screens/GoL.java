@@ -70,7 +70,7 @@ public class GoL extends PantallaAbstract implements Disposable {
         this.renderer = new ShapeRenderer();
         this.renderer.setAutoShapeType(true);
 
-        this.tablero = new Tablero(0f,150,150);
+        this.tablero = new Tablero(0f,500,500);
         this.dimensions = new Vector2(ConfigGame.WIDTH_PANTALLA / (float) this.tablero.getGrid()[0].length, ConfigGame.HEIGTH_PANTALLA / (float) this.tablero.getGrid().length);
     }
 
@@ -159,8 +159,10 @@ public class GoL extends PantallaAbstract implements Disposable {
             this.tablero.setG_C((float)Math.random());
             this.tablero.setB_C((float)Math.random());
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.G))
+        if(Gdx.input.isKeyJustPressed(Input.Keys.G)) {
+            this.state = GoL.STATE.PAUSE;
             DataInfo.saveConfig(tablero);
+        }
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.F))
         {

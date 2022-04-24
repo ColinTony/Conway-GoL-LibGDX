@@ -10,8 +10,13 @@ public class Tablero {
     private Analisis analisis;
     private String binary;
     private boolean isDataCheck;
+
     private int widthGrid;
     private int heigthGrid;
+    private int generacion;
+    private int celulasVivas;
+    private int celulasMuertas;
+
     private int s_min;
     private int s_max;
     private int b_min;
@@ -24,8 +29,13 @@ public class Tablero {
     private float G_C;
     private float B_C;
 
+
     public Tablero(float chance,int widthGrid, int heigthGrid)
     {
+        this.generacion = 0;
+        this.celulasMuertas = 0;
+        this.celulasVivas = 0;
+
         this.widthGrid = widthGrid;
         this.heigthGrid = heigthGrid;
         this.s_min = 2;
@@ -106,7 +116,6 @@ public class Tablero {
      */
     public void updateTaroide()
     {
-
         for (int x = 0; x < this.grid[0].length; x++) {
             for (int y = 0; y < this.grid[0].length; y++) {
                 int vecinos;
@@ -119,11 +128,11 @@ public class Tablero {
                 reglasCheck(vecinos,status,x,y);
             }
         }
-        DataInfo.generacion++;
         String info = "Celulas vivas" + ","+DataInfo.generacion+","+DataInfo.celulasVivas+"\n";
         String infoLog = "Logaritmo" + ","+DataInfo.generacion+","+Math.log10(DataInfo.celulasVivas)+"\n";
         this.analisis.addListInfoCelulas(info);
         this.analisis.addListInfoCelulasLog(infoLog);
+        DataInfo.generacion++;
     }
     // Default regla R(S_min,S_max,B_min,B_max).
     // R(2,3,3,3).
@@ -430,5 +439,29 @@ public class Tablero {
 
     public void setDataCheck(boolean dataCheck) {
         isDataCheck = dataCheck;
+    }
+
+    public int getGeneracion() {
+        return generacion;
+    }
+
+    public void setGeneracion(int generacion) {
+        this.generacion = generacion;
+    }
+
+    public int getCelulasVivas() {
+        return celulasVivas;
+    }
+
+    public void setCelulasVivas(int celulasVivas) {
+        this.celulasVivas = celulasVivas;
+    }
+
+    public int getCelulasMuertas() {
+        return celulasMuertas;
+    }
+
+    public void setCelulasMuertas(int celulasMuertas) {
+        this.celulasMuertas = celulasMuertas;
     }
 }

@@ -31,6 +31,10 @@ public class DataInfo {
      */
     public static void saveConfig(Tablero tablero)
     {
+
+        tablero.setCelulasVivas(celulasVivas);
+        tablero.setCelulasMuertas(celulasMuertas);
+
         Json json = new Json();
         String tableroJson = json.toJson(tablero);
         UUID unique = UUID.randomUUID();
@@ -59,10 +63,12 @@ public class DataInfo {
         if(returnValue == JFileChooser.APPROVE_OPTION)
         {
             pathChoose = chooser.getSelectedFile().getName();
-            System.out.println(pathSave+pathChoose);
             FileHandle file = Gdx.files.absolute(pathSave+pathChoose);
             Json json = new Json();
             Tablero tabTmp = json.fromJson(Tablero.class,file);
+            celulasMuertas = tabTmp.getCelulasMuertas();
+            celulasVivas = tabTmp.getCelulasVivas();
+            generacion = tablero.getGeneracion();
             return tabTmp;
         }
 

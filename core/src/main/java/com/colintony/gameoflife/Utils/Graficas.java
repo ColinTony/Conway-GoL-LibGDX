@@ -40,12 +40,12 @@ public class Graficas
         FileHandle hadleFile = Gdx.files.absolute(this.pathFilePlots);
         if (!hadleFile.exists()) {
             for (int key : map.keySet())
-                hadleFile.writeString(DataInfo.generacion + "," + key + "," + map.get(key) + "\n", true);
+                hadleFile.writeString("Configuraciones" + "," + key + "," + map.get(key) + "\n", true);
         }else
         {
             hadleFile.delete();
             for (int key : map.keySet())
-                hadleFile.writeString(DataInfo.generacion + "," + key + "," + map.get(key) + "\n", true);
+                hadleFile.writeString("Configuraciones" + "," + key + "," + map.get(key) + "\n", true);
         }
     }
 
