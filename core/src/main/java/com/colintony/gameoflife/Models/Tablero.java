@@ -132,6 +132,7 @@ public class Tablero {
         String infoLog = "Logaritmo" + ","+DataInfo.generacion+","+Math.log10(DataInfo.celulasVivas)+"\n";
         this.analisis.addListInfoCelulas(info);
         this.analisis.addListInfoCelulasLog(infoLog);
+        this.analisis.escribirTXTShannon(this);
         DataInfo.generacion++;
     }
     // Default regla R(S_min,S_max,B_min,B_max).
@@ -314,8 +315,8 @@ public class Tablero {
     }
 
 
-    public void txtMap() {
-        this.analisis.escribirTXT();
+    public void txtMapShannon(Tablero tablero) {
+        this.analisis.escribirTXTShannon(tablero);
     }
     public void txtCelulas()
     {

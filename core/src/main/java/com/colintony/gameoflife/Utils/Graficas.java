@@ -2,6 +2,7 @@ package com.colintony.gameoflife.Utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.colintony.gameoflife.Models.Tablero;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,8 +16,11 @@ public class Graficas
     private String pathFilePlots="C:/Users/mrc0l/Documents/Complejos/GoL/core/src/main/java/plots/";
     private String pathFilePlotsCelulas="C:/Users/mrc0l/Documents/Complejos/GoL/core/src/main/java/plots/";
     private String pathFilePlotsLog="C:/Users/mrc0l/Documents/Complejos/GoL/core/src/main/java/plots/";
+    private float shannon;
 
     public Graficas() {
+        this.shannon = 0f;
+
         UUID unique = UUID.randomUUID();
         this.fileNamePlotsCelulas = "plots-celulas-";
         this.fileNamePlotsLog = "plots-log-";
@@ -35,18 +39,19 @@ public class Graficas
         this.pathFilePlotsCelulas+=this.fileNamePlotsCelulas;
     }
 
-    public void writeTXTPlotConfig(HashMap<Integer,Integer> map) {
+    public void writeTXTPlotShannon(HashMap<Integer,Integer> map, Tablero tablero) {
         // Escribir el txt
+        this.shannon = 0f;
+        int n = tablero.getWidthGrid() * tablero.getHeigthGrid();
         FileHandle hadleFile = Gdx.files.absolute(this.pathFilePlots);
-        if (!hadleFile.exists()) {
-            for (int key : map.keySet())
-                hadleFile.writeString("Configuraciones" + "," + key + "," + map.get(key) + "\n", true);
-        }else
+        for (int key : map.keySet())
         {
-            hadleFile.delete();
-            for (int key : map.keySet())
-                hadleFile.writeString("Configuraciones" + "," + key + "," + map.get(key) + "\n", true);
+            double fn = (double)(map.get(key))/(double)n;
+            double shanon1 = (fn);
+            double shannon2 = (double) (Math.log(fn/n)/(double)Math.log(2));
+            this.shannon += (-1)*shanon1*shannon2;
         }
+        hadleFile.writeString("Shannon" + "," + DataInfo.generacion + "," + this.shannon + "\n", true);
     }
 
     public void writeTXTPlotCelulas(ArrayList<String> celulasInfo) {

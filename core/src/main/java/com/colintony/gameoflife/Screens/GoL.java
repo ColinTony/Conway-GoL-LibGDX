@@ -83,7 +83,7 @@ public class GoL extends PantallaAbstract implements Disposable {
         camera.update();
         batch.setProjectionMatrix(camera.combined);
         renderer.setProjectionMatrix(camera.combined);
-        this.fpsLogger.log();
+        //this.fpsLogger.log();
 
         this.inputGameStatus();
         InputsEvents.inputConocidas(this.camera,this.dimensions,this.tablero,this.screenInfo.getConocida());
@@ -199,7 +199,6 @@ public class GoL extends PantallaAbstract implements Disposable {
             this.state = GoL.STATE.PAUSE;
             String respuesta = JOptionPane.showInputDialog("Reglas R(S_min,S_max,B_min,B_max): ", "2,3,3,3");
             String[]valores = respuesta.split(",");
-            System.out.println("s_min:"+valores[0]+" s_max:"+valores[1]+" b_min:"+valores[2]+" b_max:"+valores[3]);
             this.tablero.setS_min(Integer.parseInt(valores[0]));
             this.tablero.setS_max(Integer.parseInt(valores[1]));
             this.tablero.setB_min(Integer.parseInt(valores[2]));

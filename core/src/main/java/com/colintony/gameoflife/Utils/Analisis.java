@@ -2,6 +2,7 @@ package com.colintony.gameoflife.Utils;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
+import com.colintony.gameoflife.Models.Tablero;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -112,8 +113,8 @@ public class Analisis {
     }
     public String getPathFilePlotsCelulasLog(){return this.graficas.getFileNamePlotsLog();}
 
-    public void escribirTXT() {
-        this.graficas.writeTXTPlotConfig(this.map);
+    public void escribirTXTShannon(Tablero tablero) {
+        this.graficas.writeTXTPlotShannon(this.map,tablero);
     }
     public void escribirTXTCelulas() {
         this.graficas.writeTXTPlotCelulas(this.listCelulas);
