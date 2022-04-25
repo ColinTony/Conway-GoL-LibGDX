@@ -43,7 +43,7 @@ public class ScreenInfo {
                 "Pause: P | Reanudar: R | Derecha: Rigth | Izquierda: Left | " +
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
                 "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J | Reset figura colocar: space \n\n";
-        INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F | Ver grafica configuraciones: V | Ver grafica celulas vivas: B"+
+        INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F | Ver grafica shannon: V | Ver grafica celulas vivas: B"+
         "| Ver grafica log: E | Mode checkData: M | Nuevo tablero con densidad: X | Cambiar reglas : L | Reset tablero 0f : H";
         INSTRUCCIONES += "| Cambiar figura colocar: I - ";
 
