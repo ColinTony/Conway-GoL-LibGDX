@@ -144,18 +144,28 @@ public class InputsEvents {
                         Gdx.app.postRunnable(()->Conocidas.naveMiddleweight(tablero,finalX,finalY));
                         break;
                     case 2:
-                        Gdx.app.postRunnable(()->Conocidas.naveGlider(tablero,finalX,finalY));
+                        Gdx.app.postRunnable(()->Conocidas.naveGliderDIAB(tablero,finalX,finalY));
                         break;
                     case 3:
-                        Gdx.app.postRunnable(()->Conocidas.ociladorGalaxy(tablero,finalX,finalY));
+                        Gdx.app.postRunnable(()->Conocidas.naveGliderIDAB(tablero,finalX,finalY));
                         break;
                     case 4:
-                        Gdx.app.postRunnable(()->Conocidas.ociladorClock(tablero,finalX,finalY));
+                        Gdx.app.postRunnable(()->Conocidas.naveGliderDIBA(tablero,finalX,finalY));
                         break;
                     case 5:
+                        Gdx.app.postRunnable(()->Conocidas.naveGliderIDBA(tablero,finalX,finalY));
+                        break;
+                    case 6:
+                        Gdx.app.postRunnable(()->Conocidas.ociladorGalaxy(tablero,finalX,finalY));
+                        break;
+                    case 7:
+                        Gdx.app.postRunnable(()->Conocidas.ociladorClock(tablero,finalX,finalY));
+                        break;
+                    case 8:
                         Gdx.app.postRunnable(()->Conocidas.acron(tablero,finalX,finalY));
                         break;
                     default:
+                        System.out.println("Error");
                         Gdx.app.postRunnable(()->Conocidas.onlyCelula(tablero,finalX,finalY));
                         break;
                 }

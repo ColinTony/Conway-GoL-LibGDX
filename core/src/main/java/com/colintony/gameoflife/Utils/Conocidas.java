@@ -44,7 +44,7 @@ public class Conocidas {
         --------*----------
         ------***----------
      */
-    public static void naveGlider(Tablero tablero,int x,int y)
+    public static void naveGliderDIAB(Tablero tablero,int x,int y)
     {
         try{
             boolean grid_conocidas[][] = tablero.getGrid();
@@ -54,6 +54,78 @@ public class Conocidas {
             grid_conocidas[x+2][y] = true;
             grid_conocidas[x+2][y+1]=true;
             grid_conocidas[x+1][y+2]=true;
+
+            DataInfo.celulasVivas += 5;
+            DataInfo.celulasMuertas -= 5;
+
+            tablero.setGrid(grid_conocidas);
+        }catch (IndexOutOfBoundsException e)
+        {
+            System.out.println("Ignorando error");
+        }
+
+    }
+
+    /*
+        -------------------
+        -------*-----------
+        ------*------------
+        ------***----------
+     */
+    public static void naveGliderIDAB(Tablero tablero,int x,int y)
+    {
+        try{
+            boolean grid_conocidas[][] = tablero.getGrid();
+
+            grid_conocidas[x][y] = true;
+            grid_conocidas[x+1][y] = true;
+            grid_conocidas[x+2][y] = true;
+            grid_conocidas[x][y+1]=true;
+            grid_conocidas[x+1][y+2]=true;
+
+            DataInfo.celulasVivas += 5;
+            DataInfo.celulasMuertas -= 5;
+
+            tablero.setGrid(grid_conocidas);
+        }catch (IndexOutOfBoundsException e)
+        {
+            System.out.println("Ignorando error");
+        }
+
+    }
+
+    public static void naveGliderIDBA(Tablero tablero,int x,int y)
+    {
+        try{
+            boolean grid_conocidas[][] = tablero.getGrid();
+
+            grid_conocidas[x][y] = true;
+            grid_conocidas[x+1][y] = true;
+            grid_conocidas[x+2][y] = true;
+            grid_conocidas[x][y-1]=true;
+            grid_conocidas[x+1][y-2]=true;
+
+            DataInfo.celulasVivas += 5;
+            DataInfo.celulasMuertas -= 5;
+
+            tablero.setGrid(grid_conocidas);
+        }catch (IndexOutOfBoundsException e)
+        {
+            System.out.println("Ignorando error");
+        }
+
+    }
+
+    public static void naveGliderDIBA(Tablero tablero,int x,int y)
+    {
+        try{
+            boolean grid_conocidas[][] = tablero.getGrid();
+
+            grid_conocidas[x][y] = true;
+            grid_conocidas[x+1][y] = true;
+            grid_conocidas[x+2][y] = true;
+            grid_conocidas[x+2][y-1]=true;
+            grid_conocidas[x+1][y-2]=true;
 
             DataInfo.celulasVivas += 5;
             DataInfo.celulasMuertas -= 5;

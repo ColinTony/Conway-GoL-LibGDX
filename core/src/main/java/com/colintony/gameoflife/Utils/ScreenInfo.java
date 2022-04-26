@@ -30,7 +30,10 @@ public class ScreenInfo {
         this.conocida = 0;
         this.figurasConocidas = new String[]{"Celula",
                 "Nave - Middleweight",
-                "Nave - Glider",
+                "Nave - Glider - Der-Iz-AB",
+                "Nave - Glider - Iz-Der-AB",
+                "Nave - Glider - Der-Iz-BA",
+                "Nave - Glider - Iz-Der-BA",
                 "Ocilador - Kok's Galaxy",
                 "Ocilador - Clock",
                 "Config - Acorn"};
