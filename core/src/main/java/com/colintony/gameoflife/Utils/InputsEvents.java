@@ -30,6 +30,9 @@ public class InputsEvents {
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE))
             screenInfo.setConocida(0);
 
+        if(Gdx.input.isKeyJustPressed(Input.Keys.T))
+            Conocidas.is100Glider = !Conocidas.is100Glider;
+
         if(Gdx.input.isKeyJustPressed(Input.Keys.V))
         {
             try {

@@ -47,7 +47,8 @@ public class ScreenInfo {
                 "Arriba: UP | Abajo: Down | Ocultar controles: D | Siguiente gen: N |"+
                 "Debug: Q | Cambiar color Celula: K | Cambiar color fondo: J | Reset figura colocar: space \n\n";
         INSTRUCCIONES += "| Guardar configuracion : G | Cargar configuracion: F | Ver grafica shannon: V | Ver grafica celulas vivas: B"+
-        "| Ver grafica log: E | Mode checkData: M | Nuevo tablero con densidad: X | Cambiar reglas : L | Reset tablero 0f : H";
+        "| Ver grafica log: E | Mode checkData: M | Nuevo tablero con densidad: X | Cambiar reglas : L | Reset tablero 0f : H" +
+        "| Poner100 T";
         INSTRUCCIONES += "| Cambiar figura colocar: I - ";
 
         if(conocida < this.figurasConocidas.length)
@@ -61,6 +62,7 @@ public class ScreenInfo {
         String CELULAS_VIVAS = " Celulas vivas: ";
         String CELULAR_MUERTAS=" Celulas muertas: ";
         String GENERACION = "GENERACION ACTUAL: ";
+        String poner100 = Conocidas.is100Glider ? "Poner 100 : Activado":"Poner 100 : Desactivado";
 
         CELULAR_MUERTAS += DataInfo.celulasMuertas;
         CELULAS_VIVAS += DataInfo.celulasVivas;
@@ -70,6 +72,7 @@ public class ScreenInfo {
         INFO += "          " + dataInfo;
         INFO += "          R(" + s_min +","+s_max+","+b_min+","+b_max+")";
         INFO += "          Estado: "+ state;
+        INFO += "                "+poner100;
         bitMapFont.setColor(Color.RED);
         bitMapFont.draw(batch,INSTRUCCIONES,this.posController.getX(),this.posController.getY());
         bitMapFont.draw(batch,INFO,this.posInfoCell.getX(),this.posInfoCell.getY());
